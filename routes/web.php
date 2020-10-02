@@ -16,3 +16,8 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Auth::routes();
+Route::get('/beranda', 'TelegramController@home')->name('beranda');
+Route::get('/home', 'HomeController@index')->name('home');
+
