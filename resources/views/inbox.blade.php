@@ -7,9 +7,9 @@ Inboxes
 @section('content')
 <!-- Content Header (Page header) -->
 <div class="content-header">
-  <div class="container-fluid">
+    <div class="container-fluid">
     <div class="row mb-2">
-      <div class="col-sm-6">
+        <div class="col-sm-6">
         <h1 class="m-0 text-dark">Data Inbox</h1>
       </div><!-- /.col -->
       <div class="col-sm-6">
@@ -40,8 +40,8 @@ Inboxes
         <div class="card-body">
           <div class="row">
 
-            <div class="col-12">
-              <div class="tab-content" id="vert-tabs-tabContent">
+                          <div class="col-12">
+                            <div class="tab-content" id="vert-tabs-tabContent">
 
                 <!-- tab data inbox -->
                 <div class="tab-pane text-left fade show active" id="vert-tabs-add" role="tabpanel" aria-labelledby="vert-tabs-add-tab">
@@ -113,24 +113,6 @@ Inboxes
   });
 </script>
 <script>
-  // detail pivot
-  $('#showdetailpivot').on('show.bs.modal', function(event) {
-    var button = $(event.relatedTarget)
-    var nama = button.data('nama')
-    var tipe = button.data('tipe')
-    var rute = button.data('rute')
-    var harga = button.data('harga')
-    var desc = button.data('desc')
-
-    var modal = $(this)
-    modal.find('.modal-title').text('Detail Bus ' + nama)
-    modal.find('.modal-body #namabus').text(nama)
-    modal.find('.modal-body #tipebus').text(tipe)
-    modal.find('.modal-body #rutebus').text(rute)
-    modal.find('.modal-body #hargabus').text(harga)
-    modal.find('.modal-body #deskripsi').text(desc)
-  })
-  // end detail pivot
 
   // detail bus
   $('#showdetail0').on('show.bs.modal', function(event) {
@@ -168,33 +150,6 @@ Inboxes
   })
   // end edit bus
 
-  // detail tipe
-  $('#edittipe').on('show.bs.modal', function(event) {
-    var button = $(event.relatedTarget)
-    var nama = button.data('tipe')
-    var id = button.data('id')
-
-    var modal = $(this)
-    modal.find('.modal-title').text('Edit Data Tipe ' + nama)
-    modal.find('.modal-body #namatipe').val(nama)
-    modal.find('.modal-body #tipe-id').val(id)
-  })
-  // end detail tipe
-
-  // detail rute
-  $('#editrute').on('show.bs.modal', function(event) {
-    var button = $(event.relatedTarget)
-    var nama = button.data('rute')
-    var id = button.data('id')
-
-    var modal = $(this)
-    modal.find('.modal-title').text('Edit Data Rute ' + nama)
-    modal.find('.modal-body #namarute').val(nama)
-    modal.find('.modal-body #rute-id').val(id)
-  })
-  // end detail rute
-
-
   // JQUERY FORM EDIT
 
   //edit data bus
@@ -229,70 +184,6 @@ Inboxes
     });
   });
   // end edit data bus
-
-  // EDIT TIPE
-  $('#edit-tipe').submit(function(e) {
-    e.preventDefault();
-    var id = eval(document.getElementById('tipe-id').value); //id pada inputan
-    var request = new FormData(this);
-    var endpoint = "managemen-bus/edit-tipe-bus/" + id;
-    $.ajax({
-      url: endpoint,
-      method: "POST",
-      data: request,
-      contentType: false,
-      cache: false,
-      processData: false,
-      // dataType: "json",
-      success: function(data) {
-        $('#edit-tipe')[0].reset(); //id form
-        $('#edittipe').modal('hide'); //id modal
-
-        berhasil(data.status, data.pesan);
-      },
-      error: function(xhr, status, error) {
-        var error = xhr.responseJSON;
-        if ($.isEmptyObject(error) == false) {
-          $.each(error.errors, function(key, value) {
-            gagal(key, value);
-          });
-        }
-      }
-    });
-  });
-  // END EDIT TIPE
-
-  //edit rute bus
-  $('#edit-rute').submit(function(e) {
-    e.preventDefault();
-    var id = eval(document.getElementById('rute-id').value); //id pada inputan
-    var request = new FormData(this);
-    var endpoint = "managemen-bus/edit-rute/" + id;
-    $.ajax({
-      url: endpoint,
-      method: "POST",
-      data: request,
-      contentType: false,
-      cache: false,
-      processData: false,
-      // dataType: "json",
-      success: function(data) {
-        $('#edit-rute')[0].reset(); //id form
-        $('#editrute').modal('hide'); //id modal
-
-        berhasil(data.status, data.pesan);
-      },
-      error: function(xhr, status, error) {
-        var error = xhr.responseJSON;
-        if ($.isEmptyObject(error) == false) {
-          $.each(error.errors, function(key, value) {
-            gagal(key, value);
-          });
-        }
-      }
-    });
-  });
-  // end edit rute bus
 
   // END JQUERY FORM EDIT
 </script>
