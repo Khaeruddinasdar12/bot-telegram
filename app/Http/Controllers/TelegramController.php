@@ -9,6 +9,12 @@ use App\Inbox;
 
 class TelegramController extends Controller
 {
+	public function __construct()
+	{
+	 
+	    $this->middleware('auth');
+	}
+
     public function index()
     {
     	$activity = Telegram::getUpdates();
@@ -24,7 +30,7 @@ class TelegramController extends Controller
     					$inbox->update_id = $col['update_id'];
     					$inbox->nama_kontak = $col['message']['from']['first_name'].' '.$col['message']['from']['last_name'];
     					$inbox->status = 2;
-    					$inbox->pesan = ;
+    					$inbox->pesan = $col['message']['text'];
     					$inbox->save();
     				}
     			}
@@ -36,6 +42,7 @@ class TelegramController extends Controller
 
    	public function home()
    	{
-   		return view('layouts.template');
+		$data = Inbox::all();
+   		return view('inbox', ['data' => $data]);
    	}
 }
