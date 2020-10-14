@@ -14,7 +14,7 @@ class TelegramController extends Controller
     	$activity = Telegram::getUpdates();
     	$col = collect($activity);
 
-    	return DB::transaction(function() use($col)){
+    	return DB::transaction(function() use($col){
     		try{
     			foreach ($col as $col) {
     				$inbox = Inbox::where('update_id', $col->update_id)->where('status', '2')->count();
@@ -22,19 +22,20 @@ class TelegramController extends Controller
     				if($inbox < 1) {
     					$inbox = new Inbox;
     					$inbox->update_id = $col['update_id'];
-    					$inbox->nama_kontak = $col['message']['from']['fisrt_name'].' '.$col['message']['from']['last_name'];
+    					$inbox->nama_kontak = $col['message']['from']['first_name'].' '.$col['message']['from']['last_name'];
     					$inbox->status = 2;
+    					$inbox->pesan = ;
     					$inbox->save();
     				}
     			}
     		} catch (Exception $ex) {
     			DB::rollback();
     		}
-    	}
+    	});
     }
 
    	public function home()
    	{
-   		return view('layouts.template')
+   		return view('layouts.template');
    	}
 }

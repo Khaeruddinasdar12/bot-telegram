@@ -13,7 +13,7 @@ class CreateInboxTable extends Migration
      */
     public function up()
     {
-        Schema::create('inbox', function (Blueprint $table) {
+        Schema::create('inboxes', function (Blueprint $table) {
             $table->id();
             $table->string('update_id');
             $table->string('nama_kontak');
@@ -30,6 +30,6 @@ class CreateInboxTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('inbox');
+        Schema::dropIfExists('inboxes');
     }
 }

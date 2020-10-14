@@ -19,5 +19,6 @@ Route::get('/', function () {
 
 Auth::routes();
 Route::get('/beranda', 'TelegramController@home')->name('beranda');
+Route::get('/telegram', 'TelegramController@index')->name('index.telegram');
 Route::get('/home', 'HomeController@index')->name('home');
 
