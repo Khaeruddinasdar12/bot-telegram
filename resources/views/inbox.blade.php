@@ -454,22 +454,37 @@ Inbox
         </div>
         <div class="card-body">
           <div class="row">
-=======
     <div class="row">
 
-        <div class="col-md-12">
-            <div class="card card-primary">
+        <div class="col-md-4">
+            <div class="card">
                 <div class="card-header">
-                    <h3 class="card-title">
-                        <i class="fas fa-edit"></i>
-                        Data Inbox
-                    </h3>
+                    <h3 class="card-title">Chatbox Nama User</h3>
+
                     <div class="card-tools">
-                        <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip"
-                            title="Collapse">
-                            <i class="fas fa-minus"></i></button>
+                        <button type="button" class="btn btn-tool" data-card-widget="collapse"><i
+                                class="fas fa-minus"></i>
+                        </button>
                     </div>
                 </div>
+                <div class="card-body p-0 chat-column" style="display: block;">
+                    <ul class="nav nav-pills flex-column">
+                        @foreach($data as $datas)
+                        <li class="nav-item chat">
+                            <a href="{{ route('beranda') }}" class="nav-link">
+                                <h6>{{$datas->nama_kontak}}</h6>
+                                <p>
+                                    <small> 23 Jan 2:05 pm </small>
+                                    <span class="badge bg-primary float-right">12</span>
+                                </p>
+                            </a>
+                        </li>
+                        @endforeach
+                    </ul>
+                </div>
+                <!-- /.card-body -->
+            </div>
+        </div>
                 <div class="card-body">
                     <div class="row">
 
@@ -545,13 +560,68 @@ Inbox
                                 </div>
                                 <!-- end tab data inbox -->
 
-
-                            </div>
-                        </div>
-                    </div>
+        <div class="col-md-8">
+            <!-- chatbox -->
+            <div class="card card-sucress cardutline direct-chat direct-chat-success">
+                <div class="card-header">
+                    <h3 class="card-title">Direct Chat</h3>
                 </div>
-                <!-- /.card -->
+                <!-- /.card-header -->
+                <div class="card-body">
+                    <!-- Conversations are loaded here -->
+                    <div class="direct-chat-messages">
+                        <!-- Message. Default to the left -->
+                        <div class="direct-chat-msg">
+                            <div class="direct-chat-infos clearfix">
+                                <span class="direct-chat-name float-left">Adhe Pratama</span>
+                                <span class="direct-chat-timestamp float-right">23 Jan 2:00
+                                    pm</span>
+                            </div>
+                            <!-- /.direct-chat-infos -->
+                            <img class="direct-chat-img" src="{{ asset('admin/dist/img/user1-128x128.jpg') }}"
+                                alt="Message User Image">
+                            <!-- /.direct-chat-img -->
+                            <div class="direct-chat-text">
+                                PC Saya Bermasalah
+                            </div>
+                            <!-- /.direct-chat-text -->
+                        </div>
+                        <!-- /.direct-chat-msg -->
+
+                        <!-- Message to the right -->
+                        <div class="direct-chat-msg right">
+                            <div class="direct-chat-infos clearfix">
+                                <span class="direct-chat-name float-right">Sarah Bullock</span>
+                                <span class="direct-chat-timestamp float-left">23 Jan 2:05 pm</span>
+                            </div>
+                            <!-- /.direct-chat-infos -->
+                            <img class="direct-chat-img" src="{{ asset('admin/dist/img/user3-128x128.jpg') }}"
+                                alt="Message User Image">
+                            <!-- /.direct-chat-img -->
+                            <div class="direct-chat-text">
+                                Segera Kami Tangani !!
+                            </div>
+                            <!-- /.direct-chat-text -->
+                        </div>
+                        <!-- /.direct-chat-msg -->
+                    </div>
+                    <!--/.direct-chat-messages-->
+
+                </div>
+                <!-- /.card-body -->
+                <div class="card-footer">
+                    <form action="#" method="post">
+                        <div class="input-group">
+                            <input type="text" name="message" placeholder="Type Message ..." class="form-control">
+                            <span class="input-group-append">
+                                <button type="submit" class="btn btn-success">Send</button>
+                            </span>
+                        </div>
+                    </form>
+                </div>
+                <!-- /.card-footer-->
             </div>
+            <!-- chatbox -->
         </div>
 
     </div>
