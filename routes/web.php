@@ -18,9 +18,10 @@ Route::get('/', function () {
 });
 
 Auth::routes();
-Route::get('/beranda', 'TelegramController@home')->name('beranda');
+Route::get('/inbox', 'TelegramController@home')->name('beranda');
 Route::get('/telegram', 'TelegramController@index')->name('index.telegram');
 Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/chatbox', 'Chat@index')->name('chatbox');
 
 Route::post('/1396168790:AAE4LVilrBZ6VUvS56r26b3YPUPtM7jfw80/webhook', function () {
     $update = Telegram::commandsHandler(true);

@@ -25,72 +25,93 @@ Inbox
 <section class="content">
     <div class="row">
 
-        <div class="col-md-12">
-            <div class="card card-primary">
+        <div class="col-md-3">
+            <div class="card">
                 <div class="card-header">
-                    <h3 class="card-title">
-                        <i class="fas fa-edit"></i>
-                        Data Inbox
-                    </h3>
+                    <h3 class="card-title">Chatbox Nama User</h3>
+
                     <div class="card-tools">
-                        <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip"
-                            title="Collapse">
-                            <i class="fas fa-minus"></i></button>
+                        <button type="button" class="btn btn-tool" data-card-widget="collapse"><i
+                                class="fas fa-minus"></i>
+                        </button>
                     </div>
                 </div>
-                <div class="card-body">
-                    <div class="row">
-
-                        <div class="col-12">
-                            <div class="tab-content" id="vert-tabs-tabContent">
-
-                                <!-- tab data inbox -->
-                                <div class="tab-pane text-left fade show active" id="vert-tabs-add" role="tabpanel"
-                                    aria-labelledby="vert-tabs-add-tab">
-                                    <div class="table-responsive">
-                                        <table id="example0" class="table table-bordered table-striped">
-                                            <thead>
-                                                <tr>
-                                                    <th>#</th>
-                                                    <th>Nama Kontak</th>
-                                                    <th>Pesan</th>
-                                                    <th>Waktu</th>
-                                                    <th>Action</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                @php $no = 1; @endphp
-                                                @foreach($data as $datas)
-                                                <tr>
-                                                    <td>{{$no++}}</td>
-                                                    <td>{{$datas->nama_kontak}}</td>
-                                                    <td>{{$datas->pesan}}</td>
-                                                    <td>{{$datas->created_at}}</td>
-                                                    <td>
-                                                        <a href="{{route('chatbox')}}"
-                                                            class="btn btn-outline-success btn-sm" title="Balas Pesan">
-                                                            <i class="fas fa-reply"></i>
-                                                        </a>
-
-                                                        <button class="btn btn-outline-danger btn-sm" title="hapus data"
-                                                            onclick="hapus()" id="del_data"><i
-                                                                class="fas fa-trash"></i></button>
-                                                    </td>
-                                                </tr>
-                                                @endforeach
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
-                                <!-- end tab data inbox -->
-
-
-                            </div>
-                        </div>
-                    </div>
+                <div class="card-body p-0" style="display: block;">
+                    <ul class="nav nav-pills flex-column">
+                        <li class="nav-item active">
+                            <a href="{{ route('beranda') }}" class="nav-link">
+                                <i class="fas fa-inbox"></i> Semua Inbox
+                                <span class="badge bg-primary float-right">12</span>
+                            </a>
+                        </li>
+                    </ul>
                 </div>
-                <!-- /.card -->
+                <!-- /.card-body -->
             </div>
+        </div>
+
+        <div class="col-md-9">
+            <!-- chatbox -->
+            <div class="card card-sucress cardutline direct-chat direct-chat-success">
+                <div class="card-header">
+                    <h3 class="card-title">Direct Chat</h3>
+                </div>
+                <!-- /.card-header -->
+                <div class="card-body">
+                    <!-- Conversations are loaded here -->
+                    <div class="direct-chat-messages">
+                        <!-- Message. Default to the left -->
+                        <div class="direct-chat-msg">
+                            <div class="direct-chat-infos clearfix">
+                                <span class="direct-chat-name float-left">Adhe Pratama</span>
+                                <span class="direct-chat-timestamp float-right">23 Jan 2:00
+                                    pm</span>
+                            </div>
+                            <!-- /.direct-chat-infos -->
+                            <img class="direct-chat-img" src="{{ asset('admin/dist/img/user1-128x128.jpg') }}"
+                                alt="Message User Image">
+                            <!-- /.direct-chat-img -->
+                            <div class="direct-chat-text">
+                                PC Saya Bermasalah
+                            </div>
+                            <!-- /.direct-chat-text -->
+                        </div>
+                        <!-- /.direct-chat-msg -->
+
+                        <!-- Message to the right -->
+                        <div class="direct-chat-msg right">
+                            <div class="direct-chat-infos clearfix">
+                                <span class="direct-chat-name float-right">Sarah Bullock</span>
+                                <span class="direct-chat-timestamp float-left">23 Jan 2:05 pm</span>
+                            </div>
+                            <!-- /.direct-chat-infos -->
+                            <img class="direct-chat-img" src="{{ asset('admin/dist/img/user3-128x128.jpg') }}"
+                                alt="Message User Image">
+                            <!-- /.direct-chat-img -->
+                            <div class="direct-chat-text">
+                                Segera Kami Tangani !!
+                            </div>
+                            <!-- /.direct-chat-text -->
+                        </div>
+                        <!-- /.direct-chat-msg -->
+                    </div>
+                    <!--/.direct-chat-messages-->
+
+                </div>
+                <!-- /.card-body -->
+                <div class="card-footer">
+                    <form action="#" method="post">
+                        <div class="input-group">
+                            <input type="text" name="message" placeholder="Type Message ..." class="form-control">
+                            <span class="input-group-append">
+                                <button type="submit" class="btn btn-success">Send</button>
+                            </span>
+                        </div>
+                    </form>
+                </div>
+                <!-- /.card-footer-->
+            </div>
+            <!-- chatbox -->
         </div>
 
     </div>
