@@ -29,6 +29,7 @@
     <link rel="stylesheet" href="{{ asset('admin/plugins/summernote/summernote-bs4.css') }}">
     <!-- Google Font: Source Sans Pro -->
     <link href="{{ asset('css/sweetalert2.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/style.css') }}" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
 </head>
 
@@ -51,9 +52,9 @@
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
 
                         <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
+                                                        document.getElementById('logout-form').submit();">
                             <i class="right fas fa-sign-out-alt"></i> {{ __('Logout') }}
-                        </a>
+                        </a>s
 
                         <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                             @csrf
@@ -61,7 +62,6 @@
                     </div>
                 </li>
             </ul>
-
         </nav>
         <!-- /.navbar -->
 
