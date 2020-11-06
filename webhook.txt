@@ -1,0 +1,25 @@
+{	
+	"update_id" : 750647950,
+	"message" : {
+		"message_id" : 663,
+		"from":{
+			"id" : 416439159,
+			"is_bot" : false,
+			"first_name" : "Khaeruddin",
+			"last_name" : "Asdar",
+			"username" : "KhaeruddinAsdar",
+			"language_code" : "en"
+			},
+		"chat":{
+			"id" : 416439159,
+			"first_name" : "Khaeruddin",
+			"last_name" : "Asdar",
+			"username" : "KhaeruddinAsdar",
+			"type" : "private"
+			},
+		"date" : 1604501779,
+		"text" : "ini astri"
+		}
+}
+
+https://api.telegram.org/bot1396168790:AAE4LVilrBZ6VUvS56r26b3YPUPtM7jfw80/setWebhook?url=https://bd1c3545c8a0.ngrok.io/bot/public/webhook
