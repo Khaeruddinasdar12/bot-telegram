@@ -15,10 +15,13 @@ class CreateInboxTable extends Migration
     {
         Schema::create('inboxes', function (Blueprint $table) {
             $table->id();
-            $table->string('update_id');
+            // $table->string('update_id')->nullable;
+            $table->integer('chat_id');
             $table->string('nama_kontak');
             $table->string('pesan');
-            $table->integer('status');
+            $table->enum('status', ['0', '1']); //1 untuk terbaca . . 0 untuk belum
+            $table->enum('from', ['0', '1']); //1 untuk admin . . 0 untuk user
+            $table->integer('reply_by')->nullable(); //relasi table users
             $table->timestamps();
         });
     }
