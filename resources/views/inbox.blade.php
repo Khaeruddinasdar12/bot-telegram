@@ -41,7 +41,7 @@ Inbox
                         @foreach($data as $datas)
                         <li class="nav-item chat">
                             <a href="{{ route('beranda') }}" class="nav-link">
-                                <h6>{{$datas->nama_kontak}}</h6>
+                                <h6>{{$datas->nama_kontak}} brop</h6>
                                 <p>
                                     <small> 23 Jan 2:05 pm </small>
                                     <span class="badge bg-primary float-right">12</span>
