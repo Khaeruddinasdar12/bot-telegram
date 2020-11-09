@@ -26,58 +26,51 @@ Inbox
     <div class="row">
 
         <div class="col-md-4">
-            <div class="card">
-                <div class="card-header">
-                    <h3 class="card-title">Chatbox Nama User</h3>
+            <div class="content-chat">
+                <div class="card chat-card">
+                    <div class="card-header">
+                        <h3 class="card-title">Chatbox Nama User</h3>
 
-                    <div class="card-tools">
-                        <button type="button" class="btn btn-tool" data-card-widget="collapse"><i
-                                class="fas fa-minus"></i>
-                        </button>
+                        <div class="card-tools">
+                            <button type="button" class="btn btn-tool" data-card-widget="collapse"><i
+                                    class="fas fa-minus"></i>
+                            </button>
+                        </div>
                     </div>
+                    <div class="card-body p-0 chat-column" style="display: block;">
+                        <ul class="nav nav-pills flex-column">
+                            @foreach($data as $datas)
+                            <li class="nav-item chat">
+                                <a class="nav-link" onclick="chat('{{$datas->chat_id}}')">
+                                    <h6>{{$datas->telegramuser->nama_kontak}}</h6>
+                                    <p>
+                                        <small> 23 Jan 2:05 pm </small>
+                                        <span class="badge bg-primary float-right">{{$datas->jmlPesan}}</span>
+                                    </p>
+                                </a>
+                            </li>
+                            @endforeach
+                        </ul>
+                    </div>
+                    <!-- /.card-body -->
                 </div>
-                <div class="card-body p-0 chat-column" style="display: block;">
-                    <ul class="nav nav-pills flex-column">
-                        @foreach($data as $datas)
-                        <li class="nav-item chat">
-                            <a class="nav-link" onclick="chat('{{$datas->chat_id}}')">
-                                <h6>{{$datas->telegramuser->nama_kontak}}</h6>
-                                <p>
-                                    <small> 23 Jan 2:05 pm </small>
-                                    <span class="badge bg-primary float-right">{{$datas->jmlPesan}}</span>
-                                </p>
-                            </a>
-                        </li>
-                        @endforeach
-                    </ul>
-                </div>
-                <!-- /.card-body -->
             </div>
         </div>
 
         <div class="col-md-8">
             <!-- chatbox -->
-            <div class="card card-sucress cardutline direct-chat direct-chat-success">
-                <div class="card-header">
-                    <h3 class="card-title" id="nama-user">Direct Chat</h3>
-                </div>
-                <!-- /.card-header -->
-                <div class="card-body" id="chat-body">
-                    
+            <div class="content-chat-message">
+                <div class="card card-sucress cardutline direct-chat direct-chat-success">
+                    <div class="card-header">
+                        <h3 class="card-title" id="nama-user">Direct Chat</h3>
+                    </div>
+                    <!-- /.card-header -->
+                    <div class="card-body chat-message">
 
+
+                    </div>
+                    <!-- /.card-body -->
                 </div>
-                <!-- /.card-body -->
-                <div class="card-footer">
-                    <form action="#" method="post">
-                        <div class="input-group">
-                            <input type="text" name="message" placeholder="Type Message ..." class="form-control">
-                            <span class="input-group-append">
-                                <button type="submit" class="btn btn-success">Send</button>
-                            </span>
-                        </div>
-                    </form>
-                </div>
-                <!-- /.card-footer-->
             </div>
             <!-- chatbox -->
         </div>
@@ -112,76 +105,41 @@ Inbox
 
 </script>
 <script>
-  function chat(id) {
-    // var id = eval(document.getElementById('').value); //id pada inputan
-    // console.log(''+id);
-    var endpoint = "percakapan/"+id;
-    $.ajax({
-      url: endpoint,
-      method: "GET",
-      contentType: false,
-      cache: false,
-      processData: false,
-      beforeSend: function(){
-        $(".loader").css("display","block");
-      },
-      // dataType: "json",
-      success: function(data) {
-        console.log(data[0].nama_kontak);
+    function chat(id) {
+        // var id = eval(document.getElementById('').value); //id pada inputan
+        // console.log(''+id);
+        var endpoint = "percakapan/" + id;
+        $.ajax({
+            url: endpoint,
+            method: "GET",
+            contentType: false,
+            cache: false,
+            processData: false,
+            beforeSend: function () {
+                $(".loader").css("display", "block");
+            },
+            // dataType: "json",
+            success: function (data) {
+                console.log(data[0].nama_kontak);
 
-        $("#nama-user").text(data[0].nama_kontak);
-        $("#chat-body").html('<div class="direct-chat-messages"><div class="direct-chat-msg"><div class="direct-chat-infos clearfix"><span class="direct-chat-name float-left">Adhe Pratama</span><span class="direct-chat-timestamp float-right">23 Jan 2:00 pm</span></div><div class="direct-chat-text">PC Saya Bermasalah</div></div><div class="direct-chat-msg right"><div class="direct-chat-infos clearfix"><span class="direct-chat-name float-right">Sarah Bullock</span><span class="direct-chat-timestamp float-left">23 Jan 2:05 pm</span></div><div class="direct-chat-text">Segera Kami Tangani !!</div></div></div>');
-        console.log(''+id);
-          $(".loader").css("display","none");
-        // $('#edit-bus')[0].reset(); //id form
-        // $('#editbus').modal('hide'); //id modal
-        // console.log(data.pesan);
-        // berhasil(data.status, data.pesan);
-      },
-      error: function(xhr, status, error) {
-        var error = xhr.responseJSON;
-        if ($.isEmptyObject(error) == false) {
-          $.each(error.errors, function(key, value) {
-            gagal(key, value);
-          });
-        }
-      }
-    });
-  }
+                $("#nama-user").text(data[0].nama_kontak);
+                $("#chat-body").html(
+                    '<div class="direct-chat-messages"><div class="direct-chat-msg"><div class="direct-chat-infos clearfix"><span class="direct-chat-name float-left">Adhe Pratama</span><span class="direct-chat-timestamp float-right">23 Jan 2:00 pm</span></div><div class="direct-chat-text">PC Saya Bermasalah</div></div><div class="direct-chat-msg right"><div class="direct-chat-infos clearfix"><span class="direct-chat-name float-right">Sarah Bullock</span><span class="direct-chat-timestamp float-left">23 Jan 2:05 pm</span></div><div class="direct-chat-text">Segera Kami Tangani !!</div></div></div>'
+                );
+                console.log('' + id);
+                $(".loader").css("display", "none");
+            },
+            error: function (xhr, status, error) {
+                var error = xhr.responseJSON;
+                if ($.isEmptyObject(error) == false) {
+                    $.each(error.errors, function (key, value) {
+                        gagal(key, value);
+                    });
+                }
+            }
+        });
+    }
 
-  // $('#edit-bus').click(function(e) {
-  //   e.preventDefault();
-  //   var id = eval(document.getElementById('bus-id').value); //id pada inputan
-    // console.log(id);
-    // var request = new FormData(this);
-    // var endpoint = "managemen-bus/edit-bus/" + id;
-    // $.ajax({
-    //   url: endpoint,
-    //   method: "POST",
-    //   data: request,
-    //   contentType: false,
-    //   cache: false,
-    //   processData: false,
-    //   // dataType: "json",
-    //   success: function(data) {
-    //     $('#edit-bus')[0].reset(); //id form
-    //     $('#editbus').modal('hide'); //id modal
-    //     console.log(data.pesan);
-    //     berhasil(data.status, data.pesan);
-    //   },
-    //   error: function(xhr, status, error) {
-    //     var error = xhr.responseJSON;
-    //     if ($.isEmptyObject(error) == false) {
-    //       $.each(error.errors, function(key, value) {
-    //         gagal(key, value);
-    //       });
-    //     }
-    //   }
-    // });
-  // });
-//   $('div').each(function(index, value) {
-//   console.log(`div${index}: ${this.id}`);
-// });
     // detail bus
     $('#showdetail0').on('show.bs.modal', function (event) {
         var button = $(event.relatedTarget)
