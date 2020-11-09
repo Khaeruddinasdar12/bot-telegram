@@ -12,7 +12,7 @@ class Telegramuser extends Model
     ];
 
     public function chat() {
-    	return $this->hasMany('App\Inbox', 'chat_id');
+    	return $this->hasMany('App\Inbox', 'chat_id')->orderBy('created_at', 'asc');
     }
 
 }
