@@ -40,11 +40,11 @@ Inbox
                     <ul class="nav nav-pills flex-column">
                         @foreach($data as $datas)
                         <li class="nav-item chat">
-                            <a href="{{ route('beranda') }}" class="nav-link">
-                                <h6>{{$datas->nama_kontak}} brop</h6>
+                            <a class="nav-link" onclick="chat('{{$datas->chat_id}}')">
+                                <h6>{{$datas->telegramuser->nama_kontak}}</h6>
                                 <p>
                                     <small> 23 Jan 2:05 pm </small>
-                                    <span class="badge bg-primary float-right">12</span>
+                                    <span class="badge bg-primary float-right">{{$datas->jmlPesan}}</span>
                                 </p>
                             </a>
                         </li>
@@ -59,48 +59,11 @@ Inbox
             <!-- chatbox -->
             <div class="card card-sucress cardutline direct-chat direct-chat-success">
                 <div class="card-header">
-                    <h3 class="card-title">Direct Chat</h3>
+                    <h3 class="card-title" id="nama-user">Direct Chat</h3>
                 </div>
                 <!-- /.card-header -->
-                <div class="card-body">
-                    <!-- Conversations are loaded here -->
-                    <div class="direct-chat-messages">
-                        <!-- Message. Default to the left -->
-                        <div class="direct-chat-msg">
-                            <div class="direct-chat-infos clearfix">
-                                <span class="direct-chat-name float-left">Adhe Pratama</span>
-                                <span class="direct-chat-timestamp float-right">23 Jan 2:00
-                                    pm</span>
-                            </div>
-                            <!-- /.direct-chat-infos -->
-                            <img class="direct-chat-img" src="{{ asset('admin/dist/img/user1-128x128.jpg') }}"
-                                alt="Message User Image">
-                            <!-- /.direct-chat-img -->
-                            <div class="direct-chat-text">
-                                PC Saya Bermasalah
-                            </div>
-                            <!-- /.direct-chat-text -->
-                        </div>
-                        <!-- /.direct-chat-msg -->
-
-                        <!-- Message to the right -->
-                        <div class="direct-chat-msg right">
-                            <div class="direct-chat-infos clearfix">
-                                <span class="direct-chat-name float-right">Sarah Bullock</span>
-                                <span class="direct-chat-timestamp float-left">23 Jan 2:05 pm</span>
-                            </div>
-                            <!-- /.direct-chat-infos -->
-                            <img class="direct-chat-img" src="{{ asset('admin/dist/img/user3-128x128.jpg') }}"
-                                alt="Message User Image">
-                            <!-- /.direct-chat-img -->
-                            <div class="direct-chat-text">
-                                Segera Kami Tangani !!
-                            </div>
-                            <!-- /.direct-chat-text -->
-                        </div>
-                        <!-- /.direct-chat-msg -->
-                    </div>
-                    <!--/.direct-chat-messages-->
+                <div class="card-body" id="chat-body">
+                    
 
                 </div>
                 <!-- /.card-body -->
@@ -143,12 +106,82 @@ Inbox
 <script src="{{ asset('admin/plugins/datatables/jquery.dataTables.js') }}"></script>
 <script src="{{ asset('admin/plugins/datatables-bs4/js/dataTables.bootstrap4.js') }}"></script>
 <script>
-    $(function () {
-        $("#example0, #example1, #example2, #example3, #example4").DataTable();
-    });
+    // $(function () {
+    //     $("#example0, #example1, #example2, #example3, #example4").DataTable();
+    // });
 
 </script>
 <script>
+  function chat(id) {
+    // var id = eval(document.getElementById('').value); //id pada inputan
+    // console.log(''+id);
+    var endpoint = "percakapan/"+id;
+    $.ajax({
+      url: endpoint,
+      method: "GET",
+      contentType: false,
+      cache: false,
+      processData: false,
+      beforeSend: function(){
+        $(".loader").css("display","block");
+      },
+      // dataType: "json",
+      success: function(data) {
+        console.log(data[0].nama_kontak);
+
+        $("#nama-user").text(data[0].nama_kontak);
+        $("#chat-body").html('<div class="direct-chat-messages"><div class="direct-chat-msg"><div class="direct-chat-infos clearfix"><span class="direct-chat-name float-left">Adhe Pratama</span><span class="direct-chat-timestamp float-right">23 Jan 2:00 pm</span></div><div class="direct-chat-text">PC Saya Bermasalah</div></div><div class="direct-chat-msg right"><div class="direct-chat-infos clearfix"><span class="direct-chat-name float-right">Sarah Bullock</span><span class="direct-chat-timestamp float-left">23 Jan 2:05 pm</span></div><div class="direct-chat-text">Segera Kami Tangani !!</div></div></div>');
+        console.log(''+id);
+          $(".loader").css("display","none");
+        // $('#edit-bus')[0].reset(); //id form
+        // $('#editbus').modal('hide'); //id modal
+        // console.log(data.pesan);
+        // berhasil(data.status, data.pesan);
+      },
+      error: function(xhr, status, error) {
+        var error = xhr.responseJSON;
+        if ($.isEmptyObject(error) == false) {
+          $.each(error.errors, function(key, value) {
+            gagal(key, value);
+          });
+        }
+      }
+    });
+  }
+
+  // $('#edit-bus').click(function(e) {
+  //   e.preventDefault();
+  //   var id = eval(document.getElementById('bus-id').value); //id pada inputan
+    // console.log(id);
+    // var request = new FormData(this);
+    // var endpoint = "managemen-bus/edit-bus/" + id;
+    // $.ajax({
+    //   url: endpoint,
+    //   method: "POST",
+    //   data: request,
+    //   contentType: false,
+    //   cache: false,
+    //   processData: false,
+    //   // dataType: "json",
+    //   success: function(data) {
+    //     $('#edit-bus')[0].reset(); //id form
+    //     $('#editbus').modal('hide'); //id modal
+    //     console.log(data.pesan);
+    //     berhasil(data.status, data.pesan);
+    //   },
+    //   error: function(xhr, status, error) {
+    //     var error = xhr.responseJSON;
+    //     if ($.isEmptyObject(error) == false) {
+    //       $.each(error.errors, function(key, value) {
+    //         gagal(key, value);
+    //       });
+    //     }
+    //   }
+    // });
+  // });
+//   $('div').each(function(index, value) {
+//   console.log(`div${index}: ${this.id}`);
+// });
     // detail bus
     $('#showdetail0').on('show.bs.modal', function (event) {
         var button = $(event.relatedTarget)
