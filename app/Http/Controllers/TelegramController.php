@@ -33,7 +33,10 @@ class TelegramController extends Controller
     {
         $data = Telegramuser::
                 select('id', 'nama_kontak')
-                ->with('chat:chat_id,pesan,from,status,created_at')
+                // ->with('chat:chat_id,pesan,from,status,created_at')
+                ->whereHas('chat', function($query) {
+                    $query->orderBy('created_at', 'desc');
+                })
                 ->where('id', $id)
                 ->get();
 
