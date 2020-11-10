@@ -23,6 +23,7 @@ Inbox
 </div>
 <!-- /.content-header -->
 <section class="content">
+<<<<<<< HEAD
   <div class="row">
 
     <div class="col-md-4">
@@ -35,6 +36,33 @@ Inbox
               <button type="button" class="btn btn-tool" data-card-widget="collapse"><i
                 class="fas fa-minus"></i>
               </button>
+=======
+    <div class="row">
+
+        <div class="col-md-4">
+            <div class="content-chat">
+                <div class="card chat-card">
+                    <div class="card-header">
+                        <h3 class="card-title">Chatbox Nama User</h3>
+                    </div>
+                    <div class="card-body p-0 chat-column" style="display: block;">
+                        <ul class="nav nav-pills flex-column">
+                            @foreach($data as $datas)
+                            <li class="nav-item chat">
+                                <a class="nav-link" onclick="chat('{{$datas->chat_id}}')">
+                                    <h6>{{$datas->telegramuser->nama_kontak}}</h6>
+                                    <p>
+                                        <small> 23 Jan 2:05 pm </small>
+                                        <span class="badge bg-primary float-right">{{$datas->jmlPesan}}</span>
+                                    </p>
+                                </a>
+                            </li>
+                            @endforeach
+                        </ul>
+                    </div>
+                    <!-- /.card-body -->
+                </div>
+>>>>>>> 54dcc1585aa0bfdcb355619299a77ac337624f83
             </div>
           </div>
           <div class="card-body p-0 chat-column" style="display: block;">
@@ -57,6 +85,7 @@ Inbox
       </div>
     </div>
 
+<<<<<<< HEAD
     <div class="col-md-8">
       <!-- chatbox -->
       <div class="content-chat-message">
@@ -70,6 +99,28 @@ Inbox
 
           </div>
           <!-- /.card-body -->
+=======
+        <div class="col-md-8">
+            <!-- chatbox -->
+            <div class="content-chat-message">
+                <div class="card card-sucress cardutline direct-chat direct-chat-success">
+                    <div class="card-header">
+                        <h3 class="card-title" id="nama-user">Direct Chat</h3>
+                    </div>
+                    <!-- /.card-header -->
+                    <div class="card-body chat-message">
+                        <div class="text-center">
+                            <img src="{{ asset('asset/image/aps-logo.jpg') }}" alt="AngkasaPura Support Logo"
+                                class="img-fluid aps-bg">
+                            <h2>AngkasaPura Support</h2>
+                            <h4>Chat Bot Telegram</h4>
+                        </div>
+                    </div>
+                    <!-- /.card-body -->
+                </div>
+            </div>
+            <!-- chatbox -->
+>>>>>>> 54dcc1585aa0bfdcb355619299a77ac337624f83
         </div>
       </div>
       <!-- chatbox -->
