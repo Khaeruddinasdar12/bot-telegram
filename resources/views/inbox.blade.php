@@ -106,8 +106,6 @@ Inbox
   </script>
   <script>
     function chat(id) {
-        // var id = eval(document.getElementById('').value); //id pada inputan
-        // console.log(''+id);
         var endpoint = "percakapan/" + id;
         $.ajax({
           url: endpoint,
