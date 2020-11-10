@@ -30,12 +30,6 @@ Inbox
                 <div class="card chat-card">
                     <div class="card-header">
                         <h3 class="card-title">Chatbox Nama User</h3>
-
-                        <div class="card-tools">
-                            <button type="button" class="btn btn-tool" data-card-widget="collapse"><i
-                                    class="fas fa-minus"></i>
-                            </button>
-                        </div>
                     </div>
                     <div class="card-body p-0 chat-column" style="display: block;">
                         <ul class="nav nav-pills flex-column">
@@ -66,8 +60,12 @@ Inbox
                     </div>
                     <!-- /.card-header -->
                     <div class="card-body chat-message">
-
-
+                        <div class="text-center">
+                            <img src="{{ asset('asset/image/aps-logo.jpg') }}" alt="AngkasaPura Support Logo"
+                                class="img-fluid aps-bg">
+                            <h2>AngkasaPura Support</h2>
+                            <h4>Chat Bot Telegram</h4>
+                        </div>
                     </div>
                     <!-- /.card-body -->
                 </div>

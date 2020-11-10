@@ -35,13 +35,24 @@
   height: 100%; }
   .content-chat-message .direct-chat .chat-message {
     z-index: 1;
-    display: flex;
-    flex-grow: 1;
     align-items: center;
     justify-content: center;
     box-sizing: border-box;
     width: 100%;
     overflow: scroll; }
+    .content-chat-message .direct-chat .chat-message .aps-bg {
+      width: 500px;
+      margin-top: 100px;
+      margin-bottom: 50px; }
+    .content-chat-message .direct-chat .chat-message .bot-bg {
+      width: 300px; }
+    .content-chat-message .direct-chat .chat-message h2,
+    .content-chat-message .direct-chat .chat-message h4 {
+      color: #444444; }
+    .content-chat-message .direct-chat .chat-message h2 {
+      font-weight: 300; }
+    .content-chat-message .direct-chat .chat-message h4 {
+      font-weight: 300 !important; }
 
 .direct-chat-messages {
   height: 660px;
