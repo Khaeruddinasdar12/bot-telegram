@@ -20,6 +20,7 @@ Route::get('/', function () {
 Auth::routes();
 Route::get('/beranda', 'TelegramController@home')->name('beranda');
 Route::get('/percakapan/{id}', 'TelegramController@percakapan')->name('percakapan');
+Route::post('/balas', 'TelegramController@balas')->name('balas');
 Route::get('/telegram', 'TelegramController@index')->name('index.telegram');
 Route::get('/masalah2', 'TelegramController@index');
 Route::get('/home', 'HomeController@index')->name('home');

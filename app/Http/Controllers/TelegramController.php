@@ -36,14 +36,31 @@ class TelegramController extends Controller
                 ->with('chat:chat_id,pesan,from,status,created_at')
                 ->where('id', $id)
                 ->get();
-
-        // $data = Inbox::where('chat_id', $id)
-        //     ->select('chat_id', 'pesan', 'from')
-        //     ->with('telegramuser:id,nama_kontak')
-        //     ->orderBy('created_at', 'asc')
-        //     ->get();
         return $data;
-        // return view('inbox', ['data' => $data]);
+    }
+
+    public function balas(Request $request)
+    {
+        $balas = Telegram::sendMessage([
+            'chat_id' => $request->id,
+            'parse_mode' => 'HTML',
+            'text' => $request->pesan
+        ]);
+
+        $todb = new Inbox;
+        $todb->chat_id = $request->id;
+        $todb->pesan = $request->pesan;
+        $todb->status = '1';
+        $todb->from = '1'; // from admin
+        $todb->reply_by = \Auth::user()->id;
+        $todb->save();  
+
+        if($balas) {
+            return $arrayName = array('status' => 'success' , 'pesan' => 'Berhasil mengirim pesan', 'chat_id' => $request->id);
+        } else {
+            return $arrayName = array('status' => 'error' , 'pesan' => 'Gagal mengirim pesan' );
+        }
+        
     }
 
     public function index(Request $request)

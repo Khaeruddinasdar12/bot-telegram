@@ -31,6 +31,9 @@
     <link href="{{ asset('css/sweetalert2.min.css') }}" rel="stylesheet">
     <link href="{{ asset('css/style.css') }}" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+    <script type="text/javascript" src="{{'http://ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js'}}"></script>
+
+    <script type="text/javascript" src="{{ asset('js/jquery-3.5.1.min.js') }}"></script>
 
     <style type="text/css">
       .loader {
@@ -47,7 +50,7 @@
           right: 0;
           bottom: 0;
           margin: auto; 
-          animation: spin 2s linear infinite;
+          animation: spin 1.5s linear infinite;
       }
 
       @keyframes  spin {
@@ -56,6 +59,7 @@
       }
   </style>
 </head>
+
 <div class="loader" style="display: none"></div>
 <body class="hold-transition sidebar-mini layout-fixed">
     <div class="wrapper">
@@ -78,7 +82,7 @@
                     <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
                     document.getElementById('logout-form').submit();">
                     <i class="right fas fa-sign-out-alt"></i> {{ __('Logout') }}
-                </a>s
+                </a>
 
                 <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                     @csrf
