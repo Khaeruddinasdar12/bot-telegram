@@ -4,8 +4,84 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "9604005de5edc9a2c59eef76735bb5ea",
+    "content-hash": "a76a644f5de756a27e4d757bb6084b09",
     "packages": [
+        {
+            "name": "apility/laravel-fcm",
+            "version": "v1.4.4",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/apility/Laravel-FCM.git",
+                "reference": "e1484d3831f346d5dc03d64c742e53b6f500f33c"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/apility/Laravel-FCM/zipball/e1484d3831f346d5dc03d64c742e53b6f500f33c",
+                "reference": "e1484d3831f346d5dc03d64c742e53b6f500f33c",
+                "shasum": ""
+            },
+            "require": {
+                "guzzlehttp/guzzle": "^6.0|^7.0",
+                "illuminate/support": "^5.0|^6.0|^7.0|^8.0",
+                "monolog/monolog": "^1.0|^2.0",
+                "php": ">=5.5.9"
+            },
+            "replace": {
+                "brozot/laravel-fcm": "*"
+            },
+            "require-dev": {
+                "laravel/laravel": "5.2.*",
+                "mockery/mockery": "0.9.*",
+                "phpunit/phpunit": "4.7.*",
+                "satooshi/php-coveralls": "dev-master"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "LaravelFCM\\FCMServiceProvider"
+                    ],
+                    "aliases": {
+                        "FCM": "LaravelFCM\\Facades\\FCM",
+                        "FCMGroup": "LaravelFCM\\Facades\\FCMGroup"
+                    }
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "LaravelFCM\\": "src/",
+                    "LaravelFCM\\Mocks\\": "tests/mocks"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Nicolas Brosy",
+                    "email": "nicolas.brosy@gmail.com"
+                },
+                {
+                    "name": "Thomas Alrek",
+                    "email": "thomas@apility.no"
+                }
+            ],
+            "description": "Laravel / Lumen package for Firebase Cloud Messaging ",
+            "keywords": [
+                "FCM",
+                "Firebase Cloud Messaging",
+                "firebase",
+                "laravel",
+                "lumen",
+                "notification",
+                "push"
+            ],
+            "support": {
+                "source": "https://github.com/apility/Laravel-FCM/tree/v1.4.4"
+            },
+            "time": "2020-11-19T06:05:53+00:00"
+        },
         {
             "name": "asm89/stack-cors",
             "version": "1.3.0",
@@ -747,16 +823,16 @@
         },
         {
             "name": "irazasyed/telegram-bot-sdk",
-            "version": "v3.3.0",
+            "version": "v3.4.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/irazasyed/telegram-bot-sdk.git",
-                "reference": "dfa43245b7b6071e1d1fc566bd6462cbf549a1bb"
+                "reference": "439552ebbbbbb9051f435c6556bb1c2ba5771425"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/irazasyed/telegram-bot-sdk/zipball/dfa43245b7b6071e1d1fc566bd6462cbf549a1bb",
-                "reference": "dfa43245b7b6071e1d1fc566bd6462cbf549a1bb",
+                "url": "https://api.github.com/repos/irazasyed/telegram-bot-sdk/zipball/439552ebbbbbb9051f435c6556bb1c2ba5771425",
+                "reference": "439552ebbbbbb9051f435c6556bb1c2ba5771425",
                 "shasum": ""
             },
             "require": {
@@ -764,7 +840,7 @@
                 "guzzlehttp/psr7": "^1.3",
                 "illuminate/support": "^5.5 || ^6.0 || ^7.0 || ^8.0",
                 "league/event": "^2.1",
-                "php": "^7.2"
+                "php": "^7.2 || ^8.0"
             },
             "require-dev": {
                 "phpunit/phpunit": "^8.5"
@@ -814,7 +890,11 @@
                 "telegram php",
                 "telegram sdk"
             ],
-            "time": "2020-09-10T13:37:14+00:00"
+            "support": {
+                "issues": "https://github.com/irazasyed/telegram-bot-sdk/issues",
+                "source": "https://github.com/irazasyed/telegram-bot-sdk/tree/v3.4.1"
+            },
+            "time": "2020-12-10T19:13:03+00:00"
         },
         {
             "name": "laravel/framework",
@@ -6832,5 +6912,5 @@
         "php": "^7.2.5"
     },
     "platform-dev": [],
-    "plugin-api-version": "1.1.0"
+    "plugin-api-version": "2.0.0"
 }

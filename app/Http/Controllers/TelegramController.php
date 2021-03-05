@@ -7,7 +7,7 @@ use DB;
 use Telegram;
 use App\Inbox;
 use App\Telegramuser;
-
+// use TelegramResponseException;
 class TelegramController extends Controller
 {
 	public function __construct()
@@ -41,12 +41,13 @@ class TelegramController extends Controller
 
     public function balas(Request $request)
     {
+        // return $arrayName = array('status' => 'success' , 'pesan' => 'Berhasil mengirim pesan', 'request' => $request );
         $balas = Telegram::sendMessage([
             'chat_id' => $request->id,
             'parse_mode' => 'HTML',
             'text' => $request->pesan
         ]);
-
+        
         $todb = new Inbox;
         $todb->chat_id = $request->id;
         $todb->pesan = $request->pesan;

@@ -4,6 +4,58 @@
 Inbox
 @endsection
 
+@section('firebase')
+<!-- The core Firebase JS SDK is always required and must be listed first -->
+<script src="https://www.gstatic.com/firebasejs/8.2.9/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.2.9/firebase-messaging.js"></script>
+<!-- TODO: Add SDKs for Firebase products that you want to use
+ https://firebase.google.com/docs/web/setup#available-libraries -->
+ <!-- <script src="https://www.gstatic.com/firebasejs/8.2.9/firebase-analytics.js"></script> -->
+
+ <script>
+  // Your web app's Firebase configuration
+  // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+  var firebaseConfig = {
+    apiKey: "AIzaSyAVg0UjtWhMOKnwbkSCDwhl55T8X3whAnY",
+    authDomain: "bot-telegram-ff33e.firebaseapp.com",
+    projectId: "bot-telegram-ff33e",
+    storageBucket: "bot-telegram-ff33e.appspot.com",
+    messagingSenderId: "383270674531",
+    appId: "1:383270674531:web:826b3dffb54bf521d41856",
+    measurementId: "G-7JDH318GSR"
+  };
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+  // firebase.analytics();
+</script>
+
+<!-- LAMA -->
+<!-- <script src="https://www.gstatic.com/firebasejs/8.2.2/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.2.2/firebase-messaging.js"></script>
+-->
+<!--  <script src="https://www.gstatic.com/firebasejs/8.2.2/firebase-auth.js"></script>
+ <script src="https://www.gstatic.com/firebasejs/8.2.2/firebase-firestore.js"></script> -->
+
+<!--  <script>
+  // Your web app's Firebase configuration
+  // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+  var firebaseConfig = {
+    apiKey: "AIzaSyAXMFabSnctaDDAABRSuxPKxIhiTW22qNI",
+    authDomain: "petcare-8fdde.firebaseapp.com",
+    projectId: "petcare-8fdde",
+    storageBucket: "petcare-8fdde.appspot.com",
+    messagingSenderId: "189745989695",
+    appId: "1:189745989695:web:d6841b38fbcd6e8f33508a",
+    measurementId: "G-FBG1DW8XD1"
+  };
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+  // firebase.analytics();
+</script> -->
+<!-- END -->
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+@endsection
+
 @section('content')
 <!-- Content Header (Page header) -->
 <div class="content-header">
@@ -32,18 +84,8 @@ Inbox
             <h3 class="card-title">Chatbox Nama User</h3>
           </div>
           <div class="card-body p-0 chat-column" style="display: block;">
-            <ul class="nav nav-pills flex-column">
-              @foreach($data as $datas)
-              <li class="nav-item chat">
-                <a class="nav-link" onclick="chat('{{$datas->chat_id}}')">
-                  <h6>{{$datas->telegramuser->nama_kontak}}</h6>
-                  <p>
-                    <small> 23 Jan 2:05 pm </small>
-                    <span class="badge bg-primary float-right">{{$datas->jmlPesan}}</span>
-                  </p>
-                </a>
-              </li>
-              @endforeach
+            <ul class="nav nav-pills flex-column" id="list-user"> 
+              <!-- kode list user di js -->
             </ul>
           </div>
           <!-- /.card-body -->
@@ -60,6 +102,7 @@ Inbox
           </div>
           <!-- /.card-header -->
           <div class="card-body chat-message" id="chat-body">
+            <!-- kode menampilkan percakapan di js -->
             <div class="text-center" >
               <img src="{{ asset('asset/image/aps-logo.jpg') }}" alt="AngkasaPura Support Logo"
               class="img-fluid aps-bg">
@@ -68,7 +111,7 @@ Inbox
             </div>
             
           </div>
-          <div class="card-footer"><form id="bls" method="POST"><div class="input-group"><input type="text" name="pesan" placeholder="tulis pesan" class="form-control" name="pesan" id="pesan-balasan"><input type="hidden" name="id" value="" id="hidden-id">@csrf<span class="input-group-append"><button type="" class="btn btn-success">Kirim</button></span></div></form></div>
+          <div class="card-footer"><form id="bls" method="POST"><div class="input-group"><input type="text" name="pesan" placeholder="tulis pesan" class="form-control" id="pesan-balasan"><input type="hidden" name="id" value="" id="hidden-id">@csrf<span class="input-group-append"><button type="" class="btn btn-success">Kirim</button></span></div></form></div>
           <!-- /.card-body -->
         </div>
       </div>
@@ -96,63 +139,120 @@ Inbox
 @endsection
 
 @section('js')
-<script>
-  $(document).ready(function(){
-    chat(416439159);
-    $('#bls').submit(function(e){
-      e.preventDefault();
-      // var request = new FormData(this);
-      var endpoint= 'balas';
-      $.post(endpoint, {
-        id: 416439159,
-        pesan: $('#pesan-balasan').val(),
-        _token: "{{ csrf_token() }}" 
-      });
-      $('#pesan-balasan').val('');
-      chat(416439159);
-      // return false;
-      // $.ajax({
-      //   url: endpoint,
-      //   method: "POST",
-      //   data: request,
-      //   contentType: false,
-      //   cache: false,
-      //   processData: false,
-      //   beforeSend: function () {
-      //     $(".loader").css("display", "block");
-      //   },
-      //   success:function(data){
-      //     $('#bls')[0].reset();
-      //     $(".loader").css("display", "none");
-      //   },
-      //   error: function(xhr, status, error){
-      //     var error = xhr.responseJSON; 
-      //     if ($.isEmptyObject(error) == false) {
-      //       $.each(error.errors, function(key, value) {
-      //         gagal(key, value);
-      //       });
-      //     }
-      //   } 
-      // }); 
+<script type="text/javascript">
+
+  const messaging = firebase.messaging();
+  messaging.usePublicVapidKey("BFYb7ygeQK62Rd-QINuJTmf9NF-6QXXi6jnm0sU_YpC_RIDq4X3Y-q7tQHAB5LnGeR0s_naaDafbXuI1veqQmtI");
+
+  function sendTokenToServer(token) {
+    console.log('token retrieved ', token);
+    user_id = '{{Auth::user()->id}}';
+    url = '{{route("save.token")}}';
+    axios.post(url , {
+      'token' : token, 
+      'user_id' : user_id
+    }).then(res => {
+      console.log(res);
     });
+  }
+
+  function retrieveToken() {
+    messaging.getToken().then((currentToken) =>{
+      if(currentToken) {
+        sendTokenToServer(currentToken);
+      } else {
+        alert('you should allow notification');
+      }
+    }).catch((err) => {
+      console.log('An error occured while retrieving token. ', err);
+        // showToken('Error retrieving Instance ID token. ', err);
+        // setTokenSentToServer(false);
+      })
+  }
+
+  retrieveToken();
+
+  messaging.onTokenRefresh(() => {
+    retrieveToken();
   });
 
-  function chat(id) {
-    var endpoint = "percakapan/" + id;
-    $.ajax({
-      url: endpoint,
-      method: "GET",
-      contentType: false,
-      cache: false,
-      processData: false,
-        // beforeSend: function () {
-        //   $(".loader").css("display", "block");
-        // },
-        success: function (data) {
-          $(".loader").css("display", "flex");
-          console.log(data[0].id)
-          document.getElementById('hidden-id').value = data[0].id;
-          obj = data[0].chat;
+    messaging.onMessage((payload) => { // akan otomatis tereksekusi jika sendchat(id)
+      list_dokter();
+      // chat(idDokter);
+
+      console.log('Message received. ');
+      console.log(payload);
+
+      console.log('hai user');
+      alert('hai user');
+      // location.reload();
+      
+
+    });
+    
+    var idAuth = '{!! Auth::user()->id !!}'; // yang sedang login
+
+    // var idDokter = ; // id dokter yang sedang di ajak chat
+
+
+    
+    
+    $('#bls').submit(function (e) {
+      e.preventDefault();
+      iduser = $('#hidden-id').val();
+      // list_dokter();
+      var request = new FormData(this);
+      var endpoint = '{{ route("balas") }}';
+      $.ajax({
+        url: endpoint,
+        method: "POST",
+        data: request,
+        contentType: false,
+        cache: false,
+        processData: false,
+        beforeSend: function () {
+                // idDokter = ;  
+
+                $(".loader").css("display", "block");
+              },
+            // dataType: "json",
+            success: function (data) {
+                $('#bls')[0].reset(); //reset form chat
+              },
+              error: function (xhr, status, error) {
+                var error = xhr.responseJSON;
+                if ($.isEmptyObject(error) == false) {
+                  $.each(error.errors, function (key, value) {
+                    alert(value);
+                  });
+                }
+              }
+            });
+    });
+    
+    function chat(id) { // memunculkan percakapan sesuai user yang terpilih atau terklik
+      idDokter = id;
+      // list_dokter();
+      $('#hidden-id').val(idDokter);
+      // alert('chat function ' + id);
+      var endpoint = "percakapan/"+id;
+        // alert(endpoint);
+        token = $('meta[name="csrf-token"]').attr('content');
+        $.ajax({
+          url: endpoint,
+            // method: "POST",
+            contentType: false,
+            cache: false,
+            data : {
+              '_method' : 'POST',
+              '_token'  : token
+            },
+            processData: false,
+            beforeSend: function () {
+              $(".loader").css("display", "block");
+            },
+            success: function (data) {
+                obj = data[0].chat;
                 // console.log(obj);
                 i = 1;
                 var txt = [];
@@ -166,109 +266,72 @@ Inbox
                     '<div class="direct-chat-msg"><div class="direct-chat-infos clearfix"><span class="direct-chat-name float-left"></span></div><div class="direct-chat-text">' +
                     value.pesan + '</div></div>';
                   }
-                    // data = 
-                    // console.log(value.from);
                     i++;
                   });
-
-                $("#nama-user").text(data[0].nama_kontak);
-                $("#chat-body").html(
-                  '<div class="direct-chat-messages" id="scroll">' + txt.join([separator = ''])
-                  );
+                // $("#nama-user").text(data[0].nama_kontak);
+                $("#chat-body").html(txt.join([separator = '']));
                 // console.log('' + id);
-                // window.scrollTo(0,document.querySelector("#chat-body").scrollHeight);
-                // var elmnt = document.getElementById("chat-body");
-                // elmnt.scrollIntoView(false);
-                // $('#chat-body').scrollTop($('#chat-body')[0].scrollHeight);
-                $(".loader").css("display", "none");
+                // $(".loader").css("display", "none");
               },
               error: function (xhr, status, error) {
                 var error = xhr.responseJSON;
                 if ($.isEmptyObject(error) == false) {
                   $.each(error.errors, function (key, value) {
-                    gagal(key, value);
+                    alert(key, value);
                   });
                 }
               }
             });
-    // chat(416439159);
-  }
+      }
 
-
-  
-
-    // detail bus
-    $('#showdetail0').on('show.bs.modal', function (event) {
-      var button = $(event.relatedTarget)
-      var nama = button.data('nama')
-      var tipe = button.data('tipe')
-      var kursi = button.data('kursi')
-      var desc = button.data('desc')
-
-      var modal = $(this)
-      modal.find('.modal-title').text('Detail Bus ' + nama)
-      modal.find('.modal-body #namabuss').text(nama)
-      modal.find('.modal-body #tipebuss').text(tipe)
-      modal.find('.modal-body #kursis').text(kursi)
-      modal.find('.modal-body #deskripsis').text(desc)
-    })
-    // end detail bus
-
-    // edit bus
-    $('#editbus').on('show.bs.modal', function (event) {
-      var button = $(event.relatedTarget)
-      var nama = button.data('nama')
-      var tipe = button.data('tipe')
-      var kursi = button.data('kursi')
-      var desc = button.data('desc')
-      var id = button.data('id')
-
-      var modal = $(this)
-      modal.find('.modal-title').text('Edit Data Bus ' + nama)
-      modal.find('.modal-body #namabusss').val(nama)
-      modal.find('.modal-body #tipebusss').val(tipe)
-      modal.find('.modal-body #kursiss').val(kursi)
-      modal.find('.modal-body #bus-id').val(id)
-      modal.find('.modal-body #deskripsiss').val(desc)
-    })
-    // end edit bus
-
-    // JQUERY FORM EDIT
-
-    //edit data bus
-    $('#edit-bus').submit(function (e) {
-      e.preventDefault();
-        var id = eval(document.getElementById('bus-id').value); //id pada inputan
-        console.log(id);
-        var request = new FormData(this);
-        var endpoint = "managemen-bus/edit-bus/" + id;
-        $.ajax({
-          url: endpoint,
-          method: "POST",
-          data: request,
-          contentType: false,
-          cache: false,
-          processData: false,
-            // dataType: "json",
-            success: function (data) {
-                $('#edit-bus')[0].reset(); //id form
-                $('#editbus').modal('hide'); //id modal
-                console.log(data.pesan);
-                berhasil(data.status, data.pesan);
+    function list_user() { // menampilkan list user yang pernah chat
+      var endpoint = "{{route('user.list-user')}}";
+      $.ajax({
+        url: endpoint,
+        method: "GET",
+        contentType: false,
+        cache: false,
+        processData: false,
+        success: function (data) {
+          // alert('success');
+          // obj = data[0].chat;
+                // console.log(data);
+                i = 1;
+                var txt = [];
+                $.each(data, function (key, value) {
+                  // if(value.dokter_id == idDokter) {
+                  //   var css = 'active_chat';
+                  // } else {
+                    var css = '';
+                  // }
+                  txt[i] ='<li class="nav-item chat"><a class="nav-link" onclick="chat('+value.id+')"><h6>'+value.nama_kontak+'</h6><p><small> 23 Jan 2:05 pm </small><span class="badge bg-primary float-right">1</span></p></a>              </li>';
+                  i++;
+                });
+                // $("#nama-user").text(data[0].nama_kontak); 
+                $("#list-user").html(txt.join([separator = '']));
+                // console.log('' + id);
+                // $(".loader").css("display", "none");
               },
               error: function (xhr, status, error) {
                 var error = xhr.responseJSON;
                 if ($.isEmptyObject(error) == false) {
                   $.each(error.errors, function (key, value) {
-                    gagal(key, value);
+                    alert(key, value);
                   });
                 }
               }
             });
-      });
-    // end edit data bus
+    }
+    
+    $(document).ready(function(){ //menampilkan list dokter dan chat nya jika ada
+      list_user();
+      // alert('halo');
+      // if(idDokter == 0) {
 
-    // END JQUERY FORM EDIT
-
+      // } else {
+      //   chat(idDokter);  
+      // }
+      
+    });
   </script>
   @endsection

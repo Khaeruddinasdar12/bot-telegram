@@ -17,6 +17,11 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/getupdates', function() {
+    $updates = Telegram::getMe();
+    return (json_encode($updates));
+});
+
 Auth::routes();
 Route::get('/beranda', 'TelegramController@home')->name('beranda');
 Route::get('/percakapan/{id}', 'TelegramController@percakapan')->name('percakapan');
@@ -27,5 +32,9 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/chatbox', 'Chat@index')->name('chatbox');
 
 // Route::post('/1396168790:AAE4LVilrBZ6VUvS56r26b3YPUPtM7jfw80/webhook', 'TelegramController@webhook');
+
+Route::get('/list-user', 'MessageController@listUser')->name('user.list-user');
+Route::post('create-chat', 'MessageController@store')->name('user.createchat');
+
 Route::post('/webhook', 'Webhook@webhook');
 Route::get('/tes', 'Webhook@webhook');

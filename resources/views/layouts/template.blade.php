@@ -34,7 +34,7 @@
     <script type="text/javascript" src="{{'http://ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js'}}"></script>
 
     <script type="text/javascript" src="{{ asset('js/jquery-3.5.1.min.js') }}"></script>
-
+    @yield('firebase')
     <style type="text/css">
       .loader {
           border: 8px solid #f3f3f3; /* Light grey */
@@ -96,10 +96,10 @@
 <!-- Main Sidebar Container -->
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
-    <a href="index3.html" class="brand-link">
+    <a href="#" class="brand-link">
         <img src="{{ asset('admin/dist/img/AdminLTELogo.png') }}" alt="AdminLTE Logo"
         class="brand-image img-circle elevation-3" style="opacity: .8">
-        <span class="brand-text font-weight-light">BotTelegram</span>
+        <span class="brand-text font-weight-light">{{config('app.name')}}</span>
     </a>
 
     <!-- Sidebar -->
