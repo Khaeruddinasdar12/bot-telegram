@@ -142,7 +142,7 @@ Inbox
 <script type="text/javascript">
 
   const messaging = firebase.messaging();
-  messaging.usePublicVapidKey("BFYb7ygeQK62Rd-QINuJTmf9NF-6QXXi6jnm0sU_YpC_RIDq4X3Y-q7tQHAB5LnGeR0s_naaDafbXuI1veqQmtI");
+  messaging.usePublicVapidKey("BJy-g7JentFaP664WOKvQnTOigkACjXX7EYE0dRiFNdqh6iMn0TztzCEN-CSlPQvNjYK0uJ-lOYB6XaPCLQAnAQ");
 
   function sendTokenToServer(token) {
     console.log('token retrieved ', token);
@@ -177,14 +177,14 @@ Inbox
   });
 
     messaging.onMessage((payload) => { // akan otomatis tereksekusi jika sendchat(id)
-      list_dokter();
-      // chat(idDokter);
+      list_user();
+      chat(iduser);
 
       console.log('Message received. ');
       console.log(payload);
 
       console.log('hai user');
-      alert('hai user');
+    //   alert('hai user');
       // location.reload();
       
 
@@ -218,6 +218,8 @@ Inbox
             // dataType: "json",
             success: function (data) {
                 $('#bls')[0].reset(); //reset form chat
+                list_user();
+                chat(iduser);
               },
               error: function (xhr, status, error) {
                 var error = xhr.responseJSON;
@@ -231,9 +233,9 @@ Inbox
     });
     
     function chat(id) { // memunculkan percakapan sesuai user yang terpilih atau terklik
-      idDokter = id;
+      iduser = id;
       // list_dokter();
-      $('#hidden-id').val(idDokter);
+      $('#hidden-id').val(iduser);
       // alert('chat function ' + id);
       var endpoint = "percakapan/"+id;
         // alert(endpoint);

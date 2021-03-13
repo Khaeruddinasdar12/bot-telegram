@@ -16,7 +16,8 @@
         "irazasyed/telegram-bot-sdk": "^3.4",
         "laravel/framework": "^7.0",
         "laravel/tinker": "^2.0",
-        "laravel/ui": "2.4.1"
+        "laravel/ui": "2.4.1",
+        "nesbot/carbon": "^2.46"
     },
     "require-dev": {
         "facade/ignition": "^2.0",
