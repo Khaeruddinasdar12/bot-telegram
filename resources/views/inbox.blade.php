@@ -179,22 +179,7 @@ Inbox
     messaging.onMessage((payload) => { // akan otomatis tereksekusi jika sendchat(id)
       list_user();
       chat(iduser);
-
-      console.log('Message received. ');
-      console.log(payload);
-
-      console.log('hai user');
-    //   alert('hai user');
-      // location.reload();
-      
-
     });
-    
-    var idAuth = '{!! Auth::user()->id !!}'; // yang sedang login
-
-    // var idDokter = ; // id dokter yang sedang di ajak chat
-
-
     
     
     $('#bls').submit(function (e) {
@@ -232,6 +217,7 @@ Inbox
             });
     });
     
+    iduser = '';
     function chat(id) { // memunculkan percakapan sesuai user yang terpilih atau terklik
       iduser = id;
       // list_dokter();
@@ -256,6 +242,7 @@ Inbox
             success: function (data) {
                 obj = data[0].chat;
                 // console.log(obj);
+                list_user();
                 i = 1;
                 var txt = [];
                 $.each(obj, function (key, value) {
@@ -287,7 +274,7 @@ Inbox
       }
 
     function list_user() { // menampilkan list user yang pernah chat
-      var endpoint = "{{route('user.list-user')}}";
+      var endpoint = "list-user";
       $.ajax({
         url: endpoint,
         method: "GET",
@@ -301,12 +288,12 @@ Inbox
                 i = 1;
                 var txt = [];
                 $.each(data, function (key, value) {
-                  // if(value.dokter_id == idDokter) {
-                  //   var css = 'active_chat';
-                  // } else {
-                    var css = '';
-                  // }
-                  txt[i] ='<li class="nav-item chat"><a class="nav-link" onclick="chat('+value.id+')"><h6>'+value.nama_kontak+'</h6><p><small> 23 Jan 2:05 pm </small><span class="badge bg-primary float-right">1</span></p></a>              </li>';
+                    if(value.id == iduser) {
+                        var css = 'active';
+                    } else {
+                        var css = '';
+                    }
+                  txt[i] ='<li class="nav-item chat"><a class="nav-link '+css+'" onclick="chat('+value.id+')"><h6>'+value.nama_kontak+'</h6><p><small> 23 Jan 2:05 pm </small><span class="badge bg-primary float-right">1</span></p></a>              </li>';
                   i++;
                 });
                 // $("#nama-user").text(data[0].nama_kontak); 

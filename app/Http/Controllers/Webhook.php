@@ -7,6 +7,7 @@ use Telegram;
 use App\Inbox;
 use App\Telegramuser;
 use App\User;
+use Carbon\Carbon;
 
 use LaravelFCM\Message\OptionsBuilder;
 use LaravelFCM\Message\PayloadDataBuilder;
@@ -50,6 +51,7 @@ class Webhook extends Controller
             }
         }
         
+        $cekId->updated_at = Carbon::now();
         $cekId->save();
         
         $data = new Inbox;
