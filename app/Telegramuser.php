@@ -14,5 +14,18 @@ class Telegramuser extends Model
     public function chat() {
     	return $this->hasMany('App\Inbox', 'chat_id')->orderBy('created_at', 'asc');
     }
+    
+    public function getCreatedAtAttribute()
+	{
+		return \Carbon\Carbon::parse($this->attributes['created_at'])
+		// ->diffForHumans();
+		->translatedFormat('l, d F Y');
+	}
+	
+	public function getUpdatedAtAttribute()
+	{
+		return \Carbon\Carbon::parse($this->attributes['updated_at'])
+		->diffForHumans();
+	}
 
 }

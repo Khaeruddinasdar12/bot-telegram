@@ -20,11 +20,7 @@ class Webhook extends Controller
     {
         
         $post = Telegram::getWebhookUpdates();
-        // Telegram::sendMessage([
-        //     'chat_id' => '589876870', //adhe
-        //     'parse_mode' => 'HTML',
-        //     'text' => 'halo'
-        // ]);
+        
 
         $id = $post['message']['from']['id']; //id user dari telegram
 
@@ -54,14 +50,37 @@ class Webhook extends Controller
         $cekId->updated_at = Carbon::now();
         $cekId->save();
         
-        $data = new Inbox;
-        $data->chat_id      = $post['message']['from']['id'];
-        $data->pesan        = $post['message']['text'];
-        $data->status       = '0'; // belum terbaca
-        $data->from         = '0'; // dari user
-        $data->save();
+        if($post['message']['text'] == '/start') {
+            $balas = Telegram::sendMessage([
+                'chat_id' => $id,
+                'parse_mode' => 'HTML',
+                'text' => 'Selamat Datang Di BOT Telegram Aps Seat Managemen UPG'
+            ]);
+        } else if($post['message']['text'] == '/help') {
+            $balas = Telegram::sendMessage([
+                'chat_id' => $id,
+                'parse_mode' => 'HTML',
+                'text' => 'pilih menu atau jenis kerusakan yang telah disedikan oleh pihak APS Seat Manegemen UPG, perhatikan deskripsi masing-masing jenis kerusakan '
+            ]);
+        } else {
+            $data = new Inbox;
+            $data->chat_id      = $post['message']['from']['id'];
+            $data->pesan        = $post['message']['text'];
+            $data->status       = '0'; // belum terbaca
+            $data->from         = '0'; // dari user
+            $data->save();
+            
+            if($data) {
+                $balas = Telegram::sendMessage([
+                'chat_id' => $id,
+                'parse_mode' => 'HTML',
+                'text' => 'Akan segera kami periksa, mohon menunggu!'
+            ]);
+            }
+            $this->broadcast($cekId->name, $post['message']['text']);
+        }
         
-        $this->broadcast($cekId->name, $post['message']['text']);
+        
     }
     
     private function broadcast($senderName, $message)

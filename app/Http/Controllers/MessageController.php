@@ -7,6 +7,7 @@ use App\User;
 use Auth;
 use App\Telegramuser;
 use DB;
+use Telegram;
 
 use LaravelFCM\Message\OptionsBuilder;
 use LaravelFCM\Message\PayloadDataBuilder;
@@ -16,12 +17,21 @@ class MessageController extends Controller
 {
     public function listUser() //list dokter navside
 	{
-// 		$auth_id = Auth::user()->id; // user yang sedang login
-
-		//dokter yang pernah chat dengan user
-		// $dokter = DB::select(DB::raw("select inboxes.dokter_id.chat_id, max(chats.created_at) as waktu, dokters.name from chats join dokters on chats.dokter_id = dokters.id where chats.user_id = $auth_id group by chats.dokter_id, dokters.name  order by max(inboxes.created_at) desc, chats.dokter_id"));
 		$user = Telegramuser::orderBy('updated_at', 'desc')->get();
 		
 		return $user;
+	}
+	
+	public function broadcast(Request $request) //kirim pesan siaran
+	{
+		$user = Telegramuser::get();
+		foreach($user as $usr) {
+		    $balas = Telegram::sendMessage([
+                'chat_id' => $usr->id,
+                'parse_mode' => 'HTML',
+                'text' => $request->pesan
+            ]);
+		}
+		return $arrayName = array('status' => 'success' , 'pesan' => 'Berhasil mengirim pesan siaran');
 	}
 }

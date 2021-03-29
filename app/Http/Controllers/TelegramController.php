@@ -7,6 +7,7 @@ use DB;
 use Telegram;
 use App\Inbox;
 use App\Telegramuser;
+use Carbon\Carbon;
 // use TelegramResponseException;
 class TelegramController extends Controller
 {
@@ -55,7 +56,11 @@ class TelegramController extends Controller
         $todb->from = '1'; // from admin
         $todb->reply_by = \Auth::user()->id;
         $todb->save();  
-
+        
+        $updateListUser = Telegramuser::find($request->id);
+        $updateListUser->updated_at = Carbon::now();
+        $updateListUser->save();
+        
         if($balas) {
             return $arrayName = array('status' => 'success' , 'pesan' => 'Berhasil mengirim pesan', 'chat_id' => $request->id);
         } else {

@@ -36,6 +36,10 @@
     <script type="text/javascript" src="{{ asset('js/jquery-3.5.1.min.js') }}"></script>
     @yield('firebase')
     <style type="text/css">
+    body {
+        overflow-x: hidden !important;
+      }
+  
       .loader {
           border: 8px solid #f3f3f3; /* Light grey */
           border-top: 8px solid #3498db; /* Blue */
@@ -60,8 +64,8 @@
   </style>
 </head>
 
-<div class="loader" style="display: none"></div>
 <body class="hold-transition sidebar-mini layout-fixed">
+<div class="loader" style="display:none"></div>
     <div class="wrapper">
 
         <!-- Navbar -->
@@ -119,7 +123,7 @@
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
             data-accordion="false">
             <li class="nav-item has-treeview">
-                <a href=""
+                <a href="{{route('dashboard')}}"
                 class="nav-link {{ request()->is('/') || request()->is('dashboard') ? 'active' : '' }}">
                 <i class="nav-icon fas fa-tachometer-alt"></i>
                 <p>
@@ -129,14 +133,32 @@
         </li>
 
         <li class="nav-item">
-            <a href="{{ route('beranda') }}"
-            class="nav-link {{ request()->is('laporan') ? 'active' : '' }}">
-            <i class="nav-icon fas fa-file-alt"></i>
-            <p>
-                Inbox
-            </p>
-        </a>
-    </li>
+                <a href="{{ route('chatbox') }}"
+                class="nav-link {{ request()->is('chatbox') ? 'active' : '' }}">
+                <i class="nav-icon fas fa-file-alt"></i>
+                <p>
+                    Chatbox
+                </p>
+            </a>
+        </li>
+        
+        <li class="nav-item">
+            <a href="{{ route('data.customer') }}" class="nav-link {{ request()->is('data-customer') ? 'active' : '' }}">
+                <i class="nav-icon fas fa-users"></i>
+                <p>
+                    Data Customer
+                </p>
+            </a>
+        </li>
+        
+        <li class="nav-item">
+            <a href="" class="nav-link {{ request()->is('riwayat-pengerjaan') ? 'active' : '' }}">
+                <i class="nav-icon fas fa-history"></i>
+                <p>
+                    Riwayat Pengerjaan
+                </p>
+            </a>
+        </li>
 
 </ul>
 </nav>
@@ -318,6 +340,15 @@
                 button: "Ok"
             })
         }
+    }
+    
+    function good(status, pesan) {
+            Swal.fire({
+                type: status,
+                title: pesan,
+                showConfirmButton: true,
+                button: "Ok"
+            })
     }
 
     function gagal(key, pesan) {
