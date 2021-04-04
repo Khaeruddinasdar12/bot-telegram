@@ -8,6 +8,7 @@ use App\Inbox;
 use App\Telegramuser;
 use App\User;
 use Carbon\Carbon;
+use App\Pengerjaan;
 
 use LaravelFCM\Message\OptionsBuilder;
 use LaravelFCM\Message\PayloadDataBuilder;
@@ -62,6 +63,27 @@ class Webhook extends Controller
                 'parse_mode' => 'HTML',
                 'text' => 'pilih menu atau jenis kerusakan yang telah disedikan oleh pihak APS Seat Manegemen UPG, perhatikan deskripsi masing-masing jenis kerusakan '
             ]);
+        } else if($post['message']['text'] == '/komputer' || $post['message']['text'] == '/printer' || $post['message']['text'] == '/ups' || $post['message']['text'] == '/software') {
+            $data = new Inbox;
+            $data->chat_id      = $post['message']['from']['id'];
+            $data->pesan        = $post['message']['text'];
+            $data->status       = '0'; // belum terbaca
+            $data->from         = '0'; // dari user
+            $data->save();
+            
+            $pengerjaan = new Pengerjaan;
+            $pengerjaan->inboxes_id = $data->id;
+            $pengerjaan->status = '0';
+            $pengerjaan->save();
+            
+            if($data && $pengerjaan) {
+                $balas = Telegram::sendMessage([
+                    'chat_id' => $id,
+                    'parse_mode' => 'HTML',
+                    'text' => 'Akan segera kami periksa, mohon menunggu!'
+                ]);
+                $this->broadcast($cekId->name, $post['message']['text']);
+            }
         } else {
             $data = new Inbox;
             $data->chat_id      = $post['message']['from']['id'];
@@ -70,14 +92,14 @@ class Webhook extends Controller
             $data->from         = '0'; // dari user
             $data->save();
             
-            if($data) {
-                $balas = Telegram::sendMessage([
-                'chat_id' => $id,
-                'parse_mode' => 'HTML',
-                'text' => 'Akan segera kami periksa, mohon menunggu!'
-            ]);
+            $pengerjaan = new Pengerjaan;
+            $pengerjaan->inboxes_id = $data->id;
+            $pengerjaan->status = '0';
+            $pengerjaan->save();
+            
+            if($data && $pengerjaan) {
+                $this->broadcast($cekId->name, $post['message']['text']);
             }
-            $this->broadcast($cekId->name, $post['message']['text']);
         }
         
         

@@ -91,6 +91,9 @@
                 <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                     @csrf
                 </form>
+                <a class="dropdown-item" href="{{ route('profile.admin') }}">
+                    <i class="right fas fa-user"></i> Profile
+                </a>
             </div>
         </li>
     </ul>
@@ -151,11 +154,35 @@
             </a>
         </li>
         
+        <li class="nav-item {{ request()->is('pengerjaan') || request()->is('riwayat-pengerjaan') ? 'has-treeview menu-open' : '' }}">
+            <a href="#" class="nav-link {{ request()->is('pengerjaan') || request()->is('riwayat-pengerjaan') ? 'active' : '' }}">
+              <i class="nav-icon fas fa-tags"></i>
+              <p>
+                Pengerjaan
+                <i class="right fas fa-angle-left"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="{{route('pengerjaan')}}" class="nav-link  {{ request()->is('pengerjaan') ? 'active' : '' }}">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Sedang Berlangsung</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{{route('riwayat.pengerjaan')}}" class="nav-link  {{ request()->is('riwayat-pengerjaan') ? 'active' : '' }}">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Riwayat Pengerjaan</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+        
         <li class="nav-item">
-            <a href="" class="nav-link {{ request()->is('riwayat-pengerjaan') ? 'active' : '' }}">
-                <i class="nav-icon fas fa-history"></i>
+            <a href="{{route('manage.admin')}}" class="nav-link {{ request()->is('manage-admin') ? 'active' : '' }}">
+                <i class="nav-icon fas fa-user-cog"></i>
                 <p>
-                    Riwayat Pengerjaan
+                    Manage Admin
                 </p>
             </a>
         </li>
@@ -224,23 +251,6 @@
 <script src="{{ asset('js/sweetalert2.all.min.js') }}"></script>
 
 @yield('js')
-@if(session('success'))
-<script>
-    var pesan = '{{session("success")}}';
-    loginSukses();
-
-    function loginSukses() {
-        Swal.fire({
-            type: 'success',
-            title: 'Selamat Datang ' + pesan,
-            showConfirmButton: false,
-            timer: 2500
-        })
-
-    }
-
-</script>
-@endif
 <script type="text/javascript">
     function hapus() {
         $(document).on('click', "#del_data", function () {

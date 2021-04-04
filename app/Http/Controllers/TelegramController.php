@@ -42,7 +42,6 @@ class TelegramController extends Controller
 
     public function balas(Request $request)
     {
-        // return $arrayName = array('status' => 'success' , 'pesan' => 'Berhasil mengirim pesan', 'request' => $request );
         $balas = Telegram::sendMessage([
             'chat_id' => $request->id,
             'parse_mode' => 'HTML',
