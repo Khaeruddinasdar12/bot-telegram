@@ -33,6 +33,7 @@ class PengerjaanController extends Controller
 	public function konfirmasi(Request $request) //konfirmasi pengerjaan (menuju riwayat) 
 	{
 	    $data = Pengerjaan::findOrFail($request->pengerjaan_id);
+	    $data->keterangan = $request->keterangan;
 	    $data->status = '1';
 	    $data->save();
 	    return $arrayName = array(

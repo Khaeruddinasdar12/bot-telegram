@@ -33,14 +33,14 @@ Dashboard
         <!-- small box -->
         <div class="small-box bg-light">
           <div class="inner">
-            <h3></h3>
+            <h3>{{$jmlPengerjaan}}</h3>
 
-            <p>Pesanan</p>
+            <p>Jumlah Pengerjaan</p>
           </div>
           <div class="icon">
-            <i class="fas fa-cash-register"></i>
+            <i class="fas fa-tags"></i>
           </div>
-          <a href="" class="small-box-footer" >More info <i class="fas fa-arrow-circle-right"></i></a>
+          <a href="{{route('pengerjaan')}}" class="small-box-footer" >More info <i class="fas fa-arrow-circle-right"></i></a>
         </div>
       </div>
       <!-- ./col -->
@@ -48,14 +48,14 @@ Dashboard
         <!-- small box -->
         <div class="small-box bg-dark">
           <div class="inner">
-            <h3></h3>
+            <h3>{{$jmlUser}}</h3>
 
-            <p>Manage Pengecer</p>
+            <p>Jumlah User</p>
           </div>
           <div class="icon">
             <i class="fas fa-users"></i>
           </div>
-          <a href="" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+          <a href="{{route('data.customer')}}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
         </div>
       </div>
       <!-- ./col -->
