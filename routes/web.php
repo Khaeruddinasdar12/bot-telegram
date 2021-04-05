@@ -39,6 +39,7 @@ Route::post('broadcast', 'MessageController@broadcast')->name('broadcast');
 Route::post('/add-keterangan', 'PengerjaanController@keterangan')->name('keterangan.pengerjaan'); //menambah keterangan
 
 Route::get('/pengerjaan','PengerjaanController@index')->name('pengerjaan'); //pengerjaan sedang berlangsung
+Route::post('/konfirmasi-pengerjaan','PengerjaanController@konfirmasi')->name('konfirmasi.pengerjaan'); // konfirmasi pengerjaan
 Route::get('/riwayat-pengerjaan','PengerjaanController@riwayat')->name('riwayat.pengerjaan'); // riwayat pengerjaan
 // END PENGERJAAN
 // MANAGE ADMIN

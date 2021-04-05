@@ -44,12 +44,9 @@ class Webhook extends Controller
     
             if($cekId->nama_kontak == $nama_kontak) {
                 $cekId->nama_kontak = $nama_kontak;
-                
             }
         }
         
-        $cekId->updated_at = Carbon::now();
-        $cekId->save();
         
         if($post['message']['text'] == '/start') {
             $balas = Telegram::sendMessage([
@@ -82,6 +79,8 @@ class Webhook extends Controller
                     'parse_mode' => 'HTML',
                     'text' => 'Akan segera kami periksa, mohon menunggu!'
                 ]);
+                $cekId->updated_at = Carbon::now();
+                $cekId->save();
                 $this->broadcast($cekId->name, $post['message']['text']);
             }
         } else {
@@ -92,12 +91,9 @@ class Webhook extends Controller
             $data->from         = '0'; // dari user
             $data->save();
             
-            $pengerjaan = new Pengerjaan;
-            $pengerjaan->inboxes_id = $data->id;
-            $pengerjaan->status = '0';
-            $pengerjaan->save();
-            
-            if($data && $pengerjaan) {
+            if($data) {
+                $cekId->updated_at = Carbon::now();
+                $cekId->save();
                 $this->broadcast($cekId->name, $post['message']['text']);
             }
         }

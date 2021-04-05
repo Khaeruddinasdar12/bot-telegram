@@ -1,7 +1,7 @@
 @extends('layouts.template')
 
 @section('title')
-Pengerjaan Sedang Berlangsung
+Riwayat Pengerjaan 
 @endsection
 
 @section('content')
@@ -15,14 +15,14 @@ Pengerjaan Sedang Berlangsung
 
       <div class="card">
         <div class="card-header">
-          <h2 class="card-title"><i class="fa fa-tags"></i> Data Pengerjaan</h2>
+          <h2 class="card-title"><i class="fa fa-history"></i> Riwayat Pengerjaan</h2>
         </div>
         <!-- /.card-header -->
         <div class="card-body">
           <div class="card">
             <div class="card-body">
              <div class="float-left">
-              <h4>Data Pengerjaan Sedang Berlangsung</h4>
+              <h4>Data Riwayat Pengerjaan</h4>
             </div>
             <div class="table-responsive-sm">
               <table class="table table-bordered" style="width:100% !important; ">
@@ -34,7 +34,6 @@ Pengerjaan Sedang Berlangsung
                     <th>Keterangan</th>
                     <th>Status</th>
                     <th>Waktu</th>
-                    <th>Action</th>
                   </tr>
                 </thead> 
                 <tbody>
@@ -45,10 +44,8 @@ Pengerjaan Sedang Berlangsung
                         <td>{{$dt->chat->telegramuser->nama_kontak}}</td>
                         <td>{{$dt->chat->pesan}}</td>
                         <td>{{$dt->keterangan}}</td>
-                        <td><span class="badge badge-warning">Masih berlangsung</span></td>
+                        <td><span class="badge badge-success">Riwayat</span></td>
                         <td>{{$dt->created_at}}</td>
-                        <td><button class="btn btn-primary btn-xs" data-toggle="modal" data-target="#keterangan" data-id="{{$dt->id}}" data-keterangan="{{$dt->keterangan}}" title="tambah keterangan" </button><i class="fa fa-edit"></i></button>
-                        <button class="btn btn-success btn-xs" data-toggle="modal" data-target="#konfirmasi" data-id="{{$dt->id}}" data-keterangan="{{$dt->keterangan}}" title="selesaikan pengerjaan" </button><i class="fa fa-check-square"></i></button></td>
                     </tr>
                     @endforeach
                 </tbody>
@@ -92,46 +89,12 @@ Pengerjaan Sedang Berlangsung
   </div>
 </div>
 <!-- End Modal Tambah Keterangan -->
-
-
-<!-- Modal Konfirmasi -->
-<div class="modal fade" id="konfirmasi" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered" role="document">
-    
-      <div class="modal-content">
-          <form method="post" id="konfirmasi-post">
-      @csrf
-        <div class="modal-header">
-          <h5 class="modal-title">Pekerjaan Telah Selesai ?</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-
-        <div class="modal-body">
-            <input type="hidden" id="konfirmasi-id" name="pengerjaan_id">
-          <div class="form-group">
-            <label>keterangan</label>
-            <textarea class="form-control" rows="5" name="keterangan" id="keterangan-konfirmasi"></textarea>
-          </div>
-        </div>
-
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Tutup</button>
-          <button type="submit" class="btn btn-primary btn-sm">Ya, Selesai</button>
-        </div>
-        </form
-      </div>
-    
-  </div>
-</div>
-<!-- End Modal Konfirmasi -->
 <!-- END MODALS -->
 @endsection
 
 @section('js')
 <script type="text/javascript">
-$('#keterangan').on('show.bs.modal', function (event) { //tambah keterangan
+$('#keterangan').on('show.bs.modal', function (event) {
   var button = $(event.relatedTarget)
   var id = button.data('id')
   var keterangan = button.data('keterangan')
@@ -141,45 +104,6 @@ $('#keterangan').on('show.bs.modal', function (event) { //tambah keterangan
   modal.find('.modal-body #keterangan').val(keterangan)
 })
 
-$('#konfirmasi').on('show.bs.modal', function (event) { // konfirmasi pengerjaan
-  var button = $(event.relatedTarget)
-  var id = button.data('id')
-  var keterangan = button.data('keterangan')
-  
-  var modal = $(this)
-  modal.find('.modal-body #konfirmasi-id').val(id)
-  modal.find('.modal-body #keterangan-konfirmasi').val(keterangan)
-})
-
-
-$('#konfirmasi-post').submit(function(e){ // konfirmasi pengerjaan 
-    e.preventDefault();
-    var request = new FormData(this);
-    var endpoint= '{{route("konfirmasi.pengerjaan")}}';
-    $.ajax({
-      url: endpoint,
-      method: "POST",
-      data: request,
-      contentType: false,
-      cache: false,
-      processData: false,
-            // dataType: "json",
-            success:function(data){
-              $('#konfirmasi-post')[0].reset();
-              $('#konfirmasi').modal('hide');
-              berhasil(data.status, data.pesan);
-            },
-            error: function(xhr, status, error){
-              var error = xhr.responseJSON; 
-              if ($.isEmptyObject(error) == false) {
-                $.each(error.errors, function(key, value) {
-                  gagal(key, value);
-                });
-              }
-            } 
-          }); 
-  });
-  
  $('#kirim').submit(function(e){ // tambah keterangan
     e.preventDefault();
     var request = new FormData(this);

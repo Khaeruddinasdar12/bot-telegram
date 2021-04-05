@@ -30,10 +30,5 @@ class TelegramUserSeeder extends Seeder
             'id'    => 1257678746,
 	        'nama_kontak'  => 'Vendi Pakiding Bawan',
 		]);
-		
-		DB::table('telegram_users')->insert([
-            'id'    => 889052078,
-	        'nama_kontak'  => 'Icha',
-		]);
     }
 }
