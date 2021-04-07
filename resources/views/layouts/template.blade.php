@@ -38,7 +38,7 @@
     <style type="text/css">
     body {
         overflow-x: hidden !important;
-      }
+    }
   
       .loader {
           border: 8px solid #f3f3f3; /* Light grey */
@@ -73,7 +73,7 @@
             <!-- Left navbar links -->
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link" data-widget="pushmenu" href="#"><i class="fas fa-bars"></i></a>
+                    <a class="nav-link" href="#"><i class="fas fa-bars"></i></a>
                 </li>
                 <li class="nav-item dropdown">
                     <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
@@ -104,9 +104,8 @@
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
     <a href="#" class="brand-link">
-        <img src="{{ asset('admin/dist/img/AdminLTELogo.png') }}" alt="AdminLTE Logo"
-        class="brand-image img-circle elevation-3" style="opacity: .8">
-        <span class="brand-text font-weight-light">{{config('app.name')}}</span>
+        <img src="{{ asset('asset/image/png-logo.png') }}" alt="AdminLTE Logo"
+        class="brand-image image-sidebar">
     </a>
 
     <!-- Sidebar -->
@@ -156,27 +155,27 @@
         
         <li class="nav-item {{ request()->is('pengerjaan') || request()->is('riwayat-pengerjaan') ? 'has-treeview menu-open' : '' }}">
             <a href="#" class="nav-link {{ request()->is('pengerjaan') || request()->is('riwayat-pengerjaan') ? 'active' : '' }}">
-              <i class="nav-icon fas fa-tags"></i>
-              <p>
-                Pengerjaan
-                <i class="right fas fa-angle-left"></i>
-              </p>
-            </a>
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="{{route('pengerjaan')}}" class="nav-link  {{ request()->is('pengerjaan') ? 'active' : '' }}">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Sedang Berlangsung</p>
+                <i class="nav-icon fas fa-tags"></i>
+                <p>
+                    Pengerjaan
+                    <i class="right fas fa-angle-left"></i>
+                </p>
                 </a>
-              </li>
-              <li class="nav-item">
-                <a href="{{route('riwayat.pengerjaan')}}" class="nav-link  {{ request()->is('riwayat-pengerjaan') ? 'active' : '' }}">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Riwayat Pengerjaan</p>
-                </a>
-              </li>
-            </ul>
-          </li>
+                <ul class="nav nav-treeview">
+                <li class="nav-item">
+                    <a href="{{route('pengerjaan')}}" class="nav-link  {{ request()->is('pengerjaan') ? 'active' : '' }}">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Sedang Berlangsung</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{route('riwayat.pengerjaan')}}" class="nav-link  {{ request()->is('riwayat-pengerjaan') ? 'active' : '' }}">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Riwayat Pengerjaan</p>
+                    </a>
+                </li>
+                </ul>
+            </li>
         
         <li class="nav-item">
             <a href="{{route('manage.admin')}}" class="nav-link {{ request()->is('manage-admin') ? 'active' : '' }}">
