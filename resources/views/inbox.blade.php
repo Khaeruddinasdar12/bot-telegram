@@ -293,7 +293,7 @@ Inbox
                     } else {
                         var css = '';
                     }
-                  txt[i] ='<li class="nav-item chat"><a class="nav-link '+css+'" onclick="chat('+value.id+')"><h6>'+value.nama_kontak+'</h6><p><small>'+value.updated_at+'</small><span class="badge bg-primary float-right">1</span></p></a>              </li>';
+                  txt[i] ='<li class="nav-item chat"><a class="nav-link '+css+'" onclick="chat('+value.id+')"><h6>'+value.nama_kontak+'</h6><p><small>'+value.updated_at+'</small></p></a>              </li>';
                   i++;
                 });
                 // $("#nama-user").text(data[0].nama_kontak); 
