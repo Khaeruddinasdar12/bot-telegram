@@ -1,97 +1,85 @@
-.content-chat,
-.content-chat-message {
-    position: relative;
-    z-index: 100;
-    overflow: hidden;
-    min-height: 500px;
-    height: 700px;
+.brand-link {
+    height: 56px;
 
-    .chat-card {
-        position: relative;
-        z-index: 100;
-        height: 100%;
-
-        .chat-column {
-            z-index: 1;
-            display: flex;
-            flex-grow: 1;
-            align-items: center;
-            justify-content: center;
-            box-sizing: border-box;
-            width: 100%;
-            overflow: scroll;
-
-            .chat {
-                cursor: pointer;
-
-                h6 {
-                    color: black;
-                    font-weight: 500;
-                    margin-top: 10px;
-                }
-            }
-        }
+    .image-sidebar {
+        width: 200px;
+        background-color: $putih;
+        margin-top: 1px;
+        padding: 0 10px 0 10px;
+        border-radius: 5px;
     }
 }
 
-.content-chat-message {
-    .direct-chat {
-        position: relative;
-        z-index: 100;
-        height: 100%;
+.content-dashboard {
+    margin-top: 50px;
 
-        .chat-message {
-            z-index: 1;
-            align-items: center;
-            justify-content: center;
-            box-sizing: border-box;
-            width: 100%;
-            overflow: scroll;
+    .logo-dashboard {
+        width: 450px !important;
+    }
 
-            .aps-bg {
-                width: 500px;
-                margin-top: 100px;
-                margin-bottom: 50px;
+    .card-row {
+        width: 35% !important;
+
+        p {
+            font-size: 20px;
+        }
+
+        .card-pengerjaan,
+        .card-user {
+            border-radius: 10px;
+            color: $putih;
+            border: 1px solid;
+            box-shadow: none !important;
+            overflow: hidden !important;
+
+            i {
+                font-size: 70px;
+                margin-right: 30px;
+            }
+        }
+
+        .card-pengerjaan {
+            padding: 20px;
+            border-color: $merah-card;
+            color: $merah-card;
+            transition: .5s;
+
+            i {
+                color: $merah-card;
             }
 
-            .bot-bg {
-                width: 300px;
+            &:hover {
+                border-color: $merah-card;
+                color: $putih;
+                background-color: $merah-card;
+                transition: .5s;
             }
 
-            h2,
-            h4 {
-                color: rgb(68, 68, 68);
+            &:hover i {
+                color: $putih;
+            }
+        }
+
+        .card-user {
+            padding: 20px;
+            border-color: $biru-card;
+            color: $biru-card;
+            transition: .5s;
+
+            i {
+                color: $biru-card;
             }
 
-            h2 {
-                font-weight: 300;
+            &:hover {
+                border-color: $biru-card;
+                color: $putih;
+                background-color: $biru-card;
+                transition: .5s;
             }
 
-            h4 {
-                font-weight: 300 !important;
+            &:hover i {
+                color: $putih;
             }
         }
     }
-}
-
-.direct-chat-messages {
-    height: 660px;
-    max-height: 660px !important;
-    overflow: scroll;
-}
-
-::-webkit-scrollbar {
-    height: 5px;
-    width: 3px;
-    background: transparent;
-}
-
-::-webkit-scrollbar-thumb {
-    background: rgba(0, 0, 0, 0.377);
-    -webkit-border-radius: 1ex;
-    -webkit-box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.75);
-}
-
-::-webkit-scrollbar-corner {
-    background: transparent;
 }

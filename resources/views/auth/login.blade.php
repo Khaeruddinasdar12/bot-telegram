@@ -14,7 +14,7 @@
                         <div class="col-md-6">
                             <div class="card-center">
                                 <img src="{{ asset('asset/image/aps-logo.jpg') }}" class="logo-aps-login">
-                                <h1>Welcome__Admin</h1>
+                                <h1>Welcome Admin</h1>
                             </div>
 
                             <div class="card-center">

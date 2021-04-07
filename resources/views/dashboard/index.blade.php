@@ -28,47 +28,39 @@ Dashboard
 <section class="content">
   <div class="container-fluid">
     <!-- Small boxes (Stat box) -->
-    <div class="row">
-      <div class="col-lg-3 col-6">
-        <!-- small box -->
-        <div class="small-box bg-light">
-          <div class="inner">
-            <h3>{{$jmlPengerjaan}}</h3>
+    <div class="row content-dashboard">
 
-            <p>Jumlah Pengerjaan</p>
-          </div>
-          <div class="icon">
-            <i class="fas fa-tags"></i>
-          </div>
-          <a href="{{route('pengerjaan')}}" class="small-box-footer" >More info <i class="fas fa-arrow-circle-right"></i></a>
-        </div>
+      <div class="col-md-6 text-center">
+        <img src="{{ asset('asset/image/angkasa-pura-support.png') }}" class="logo-dashboard">
       </div>
-      <!-- ./col -->
-      <div class="col-lg-3 col-6">
-        <!-- small box -->
-        <div class="small-box bg-dark">
-          <div class="inner">
-            <h3>{{$jmlUser}}</h3>
 
-            <p>Jumlah User</p>
+      <div class="row card-row">
+        <a href="{{route('pengerjaan')}}" class="col-md-12">
+          <div class="small-box card-pengerjaan">
+            <div class="inner">
+              <h3>{{$jmlPengerjaan}}</h3>
+              <p>Jumlah Pengerjaan</p>
+            </div>
+            <div class="icon">
+              <i class="fas fa-tags"></i>
+            </div>
           </div>
-          <div class="icon">
-            <i class="fas fa-users"></i>
+        </a>
+
+        <a href="{{route('data.customer')}}" class="col-md-12">
+          <div class="small-box card-user">
+            <div class="inner">
+              <h3>{{$jmlUser}}</h3>
+              <p>Jumlah User</p>
+            </div>
+            <div class="icon">
+              <i class="fas fa-users"></i>
+            </div>
           </div>
-          <a href="{{route('data.customer')}}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
-        </div>
+        </a>
       </div>
-      <!-- ./col -->
-    </div>
-    <!-- /.row -->
-    <!-- Main row -->
-    <div class="row">
-      <!-- Left col -->
 
-      <!-- right col -->
     </div>
-    <!-- /.row (main row) -->
-  </div><!-- /.container-fluid -->
+  </div>
 </section>
-<!-- /.content -->
 @endsection
