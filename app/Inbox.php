@@ -22,6 +22,13 @@ class Inbox extends Model
         return $this->belongsTo('App\User', 'reply_by');
     }
     
+    public function getCreatedAtAttribute()
+	{
+		return \Carbon\Carbon::parse($this->attributes['created_at'])
+// 		->diffForHumans();
+        ->translatedFormat('d F Y H:i');
+	}
+	
     public function getUpdatedAtAttribute()
 	{
 		return \Carbon\Carbon::parse($this->attributes['updated_at'])

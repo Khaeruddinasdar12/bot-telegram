@@ -249,11 +249,11 @@ Inbox
                   if (value.from == 1) {
                     txt[i] =
                     '<div class="direct-chat-msg right"><div class="direct-chat-infos clearfix"></div><div class="direct-chat-text">' +
-                    value.pesan + '</div></div>';
+                    value.pesan + '<div class="float-right"> ' + value.created_at +'</div></div></div>';
                   } else {
                     txt[i] =
                     '<div class="direct-chat-msg"><div class="direct-chat-infos clearfix"><span class="direct-chat-name float-left"></span></div><div class="direct-chat-text">' +
-                    value.pesan + '</div></div>';
+                    value.pesan + '<div class="float-right"> '+value.created_at+'</div></div></div>';
                   }
                     i++;
                   });

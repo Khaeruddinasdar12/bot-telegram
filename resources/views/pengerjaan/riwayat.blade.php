@@ -44,7 +44,7 @@ Riwayat Pengerjaan
                         <td>{{$dt->chat->telegramuser->nama_kontak}}</td>
                         <td>{{$dt->chat->pesan}}</td>
                         <td>{{$dt->keterangan}}</td>
-                        <td><span class="badge badge-success">Riwayat</span></td>
+                        <td><span class="badge badge-success">Selesai</span></td>
                         <td>{{$dt->created_at}}</td>
                     </tr>
                     @endforeach

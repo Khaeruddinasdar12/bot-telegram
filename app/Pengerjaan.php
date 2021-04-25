@@ -14,6 +14,7 @@ class Pengerjaan extends Model
     public function getCreatedAtAttribute()
 	{
 		return \Carbon\Carbon::parse($this->attributes['created_at'])
-		->diffForHumans();
+// 		->diffForHumans();
+        ->translatedFormat('l, d F Y H:i');
 	}
 }

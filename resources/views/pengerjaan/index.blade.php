@@ -47,7 +47,7 @@ Pengerjaan Sedang Berlangsung
                         <td>{{$dt->keterangan}}</td>
                         <td><span class="badge badge-warning">Masih berlangsung</span></td>
                         <td>{{$dt->created_at}}</td>
-                        <td><button class="btn btn-primary btn-xs" data-toggle="modal" data-target="#keterangan" data-id="{{$dt->id}}" data-keterangan="{{$dt->keterangan}}" title="tambah keterangan" </button><i class="fa fa-edit"></i></button>
+                        <td><button class="btn btn-primary btn-xs" data-toggle="modal" data-target="#keterangan" data-id="{{$dt->id}}" data-keterangan="{{$dt->keterangan}}" title="tambah keterangan" </button><i class="fa fa-plus"></i></button>
                         <button class="btn btn-success btn-xs" data-toggle="modal" data-target="#konfirmasi" data-id="{{$dt->id}}" data-keterangan="{{$dt->keterangan}}" title="selesaikan pengerjaan" </button><i class="fa fa-check-square"></i></button></td>
                     </tr>
                     @endforeach
